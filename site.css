@@ -499,7 +499,10 @@ img, canvas { max-width: 100%; }
 
 textarea,
 select,
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="datetime-local"] {
   width: 100%;
   padding: 0.7rem 0.75rem;
   border: 1px solid var(--line);
@@ -510,6 +513,12 @@ input[type="text"] {
 }
 
 textarea { min-height: 9rem; resize: vertical; }
+
+textarea.mono,
+input.mono {
+  font-family: Consolas, "Cascadia Mono", ui-monospace, monospace;
+  font-size: 0.95rem;
+}
 
 .row-2 {
   display: grid;

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parola hash — Emre Kartın</title>
+  <meta name="description" content="Paroladan bcrypt hash üret. Sonuç $2a$ ile başlar. Hesap tarayıcıda kalır." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=7" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Parola hash</h1>
+
+    <div class="field">
+      <label for="pw">Parola</label>
+      <input id="pw" type="password" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label for="rounds">Zorluk</label>
+      <select id="rounds">
+        <option value="8">8 — hızlı</option>
+        <option value="10" selected>10 — olağan</option>
+        <option value="12">12 — yavaş</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="hash-out">Hash</label>
+      <textarea id="hash-out" class="mono" readonly spellcheck="false"></textarea>
+    </div>
+    <p id="hash-status" class="status" aria-live="polite"></p>
+    <p id="hash-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="hash-make">Hash üret</button>
+      <button type="button" id="hash-copy" class="ghost">Kopyala</button>
+      <button type="button" id="hash-check" class="ghost">Bu parola eşleşiyor mu</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./bcrypt.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
