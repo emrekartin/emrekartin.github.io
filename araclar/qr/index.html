@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR Code Generator — Emre Kartın</title>
+  <meta name="description" content="QR kodu tarayıcıda üret. Metin sunucuya gitmez. PNG veya SVG indir." />
+  <meta name="theme-color" content="#f3efe6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css" />
+</head>
+<body>
+  <div class="wrap wrap-wide">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">QR Code Generator</h1>
+
+    <div class="qr-layout">
+      <form id="qr-form">
+        <div class="field">
+          <label for="qr-text">Metin veya bağlantı</label>
+          <textarea id="qr-text" name="text" placeholder="https:// veya kısa bir not" spellcheck="false"></textarea>
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="qr-ecc">Hata düzeltme</label>
+            <select id="qr-ecc" name="ecc">
+              <option value="L">L — düşük, uzun metin</option>
+              <option value="M" selected>M — çoğu iş için</option>
+              <option value="Q">Q — logo binecekse</option>
+              <option value="H">H — en dayanıklı</option>
+            </select>
+          </div>
+          <div class="field">
+            <span class="field-label">Renk</span>
+            <div class="color-pair">
+              <label for="qr-dark">Desen <input id="qr-dark" type="color" value="#1c1916" /></label>
+              <label for="qr-light">Zemin <input id="qr-light" type="color" value="#fffdf8" /></label>
+            </div>
+          </div>
+        </div>
+        <p id="qr-status" class="status" aria-live="polite"></p>
+        <p id="qr-warn" class="warn"></p>
+        <p id="qr-error" class="error" role="alert"></p>
+        <div class="actions">
+          <button type="button" id="download-png" disabled>PNG indir</button>
+          <button type="button" id="download-svg" disabled>SVG indir</button>
+          <button type="button" id="fill-sample" class="ghost">Örnek doldur</button>
+          <button type="button" id="clear" class="ghost">Temizle</button>
+        </div>
+      </form>
+
+      <div class="preview">
+        <p class="meta">Önizleme</p>
+        <canvas id="qr-canvas" hidden></canvas>
+        <div id="qr-empty" class="preview-empty">Kod burada görünecek.</div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./qrcode.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

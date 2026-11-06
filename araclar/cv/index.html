@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATS CV Builder — Emre Kartın</title>
+  <meta name="description" content="Özgeçmişi bölüm bölüm doldur, A4 önizlemeyi gör, yazdırarak PDF al. Taslak tarayıcıda kalır." />
+  <meta name="theme-color" content="#f3efe6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css" />
+  <link rel="stylesheet" href="./cv.css?v=3" />
+</head>
+<body class="cv-page" data-view="edit">
+  <div class="cv-shell">
+    <header class="cv-top">
+      <a class="cv-back" href="/araclar/">← Kullanılabilir araçlar</a>
+      <div class="cv-title">
+        <strong>ATS CV Builder</strong>
+        <span id="save-state">Boş bölüm sayfada çıkmaz. Taslak bu tarayıcıda durur.</span>
+      </div>
+      <div class="cv-top-actions">
+        <button type="button" id="sample" class="ghost">Örnek</button>
+        <button type="button" id="reset" class="ghost">Temizle</button>
+        <button type="button" id="print" title="Yazdır penceresinde hedef olarak PDF’i seç">PDF al</button>
+      </div>
+    </header>
+
+    <div class="view-switch" role="group" aria-label="Görünüm">
+      <button type="button" id="show-edit" aria-pressed="true">Düzenle</button>
+      <button type="button" id="show-preview" class="ghost" aria-pressed="false">Önizleme</button>
+    </div>
+
+    <div class="cv-body">
+      <nav class="steps" id="steps" aria-label="Bölümler"></nav>
+      <section class="panel" id="panel"></section>
+      <aside class="preview-pane">
+        <p class="meta">Önizleme · A4</p>
+        <div id="sheet" class="sheet"></div>
+      </aside>
+    </div>
+  </div>
+  <script src="./cv.js?v=4"></script>
+</body>
+</html>
