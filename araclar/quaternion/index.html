@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quaternion Converter — Emre Kartın</title>
+  <meta name="description" content="Unity Euler X, Y, Z açısını quaternion x, y, z, w değerine çevirir." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=8" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Quaternion Converter</h1>
+
+    <div class="row-3">
+      <div class="field">
+        <label for="eu-x">Euler X</label>
+        <input id="eu-x" class="mono" type="text" inputmode="decimal" placeholder="0" />
+      </div>
+      <div class="field">
+        <label for="eu-y">Euler Y</label>
+        <input id="eu-y" class="mono" type="text" inputmode="decimal" placeholder="0" />
+      </div>
+      <div class="field">
+        <label for="eu-z">Euler Z</label>
+        <input id="eu-z" class="mono" type="text" inputmode="decimal" placeholder="0" />
+      </div>
+    </div>
+    <div class="row-4">
+      <div class="field">
+        <label for="q-x">x</label>
+        <input id="q-x" class="mono" type="text" inputmode="decimal" />
+      </div>
+      <div class="field">
+        <label for="q-y">y</label>
+        <input id="q-y" class="mono" type="text" inputmode="decimal" />
+      </div>
+      <div class="field">
+        <label for="q-z">z</label>
+        <input id="q-z" class="mono" type="text" inputmode="decimal" />
+      </div>
+      <div class="field">
+        <label for="q-w">w</label>
+        <input id="q-w" class="mono" type="text" inputmode="decimal" />
+      </div>
+    </div>
+    <p id="quat-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="to-quat">Quaternion'a çevir</button>
+      <button type="button" id="to-euler" class="ghost">Euler'a çevir</button>
+      <button type="button" id="quat-copy" class="ghost">Kopyala</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

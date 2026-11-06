@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TC Generator — Emre Kartın</title>
+  <meta name="description" content="Kontrol basamağı tutan 11 haneli TC kimlik no üretir. Tarayıcıda kalır." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=7" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">TC Generator</h1>
+
+    <div class="field">
+      <label for="tc-out">TC kimlik no</label>
+      <input id="tc-out" class="mono" type="text" inputmode="numeric" maxlength="11" />
+    </div>
+    <p id="tc-status" class="status" aria-live="polite"></p>
+    <p id="tc-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="tc-new">Üret</button>
+      <button type="button" id="tc-check" class="ghost">Kontrol et</button>
+      <button type="button" id="tc-copy" class="ghost">Kopyala</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

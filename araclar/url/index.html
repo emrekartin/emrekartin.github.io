@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>URL Encoder — Emre Kartın</title>
+  <meta name="description" content="Adresteki boşluk ve Türkçe karakteri kodlar veya çözer." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=7" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">URL Encoder</h1>
+
+    <div class="field">
+      <label for="url-in">Adres</label>
+      <textarea id="url-in" class="mono" spellcheck="false"></textarea>
+    </div>
+    <div class="field">
+      <label for="url-out">Sonuç</label>
+      <textarea id="url-out" class="mono" readonly spellcheck="false"></textarea>
+    </div>
+    <p id="url-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="url-encode">Kodla</button>
+      <button type="button" id="url-decode" class="ghost">Çöz</button>
+      <button type="button" id="url-copy" class="ghost">Kopyala</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

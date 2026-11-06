@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Color Converter — Emre Kartın</title>
+  <meta name="description" content="Rengi hex, RGB ve Unity Color değerine çevirir. Ekrandan renk yakalanabilir." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=8" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Color Converter</h1>
+
+    <div class="field">
+      <span class="field-label">Renk</span>
+      <div class="color-pair">
+        <input id="color-pick" type="color" value="#1d4ed8" aria-label="Renk seç" />
+        <button type="button" id="color-eye">Yakala</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="color-hex">Hex</label>
+      <input id="color-hex" class="mono" type="text" spellcheck="false" value="#1d4ed8" />
+    </div>
+    <div class="row-3">
+      <div class="field">
+        <label for="color-r">R</label>
+        <input id="color-r" class="mono" type="text" inputmode="numeric" />
+      </div>
+      <div class="field">
+        <label for="color-g">G</label>
+        <input id="color-g" class="mono" type="text" inputmode="numeric" />
+      </div>
+      <div class="field">
+        <label for="color-b">B</label>
+        <input id="color-b" class="mono" type="text" inputmode="numeric" />
+      </div>
+    </div>
+    <div class="field">
+      <label for="color-unity">Unity</label>
+      <input id="color-unity" class="mono" type="text" spellcheck="false" />
+    </div>
+    <p id="color-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="from-hex">Hex'ten</button>
+      <button type="button" id="from-rgb" class="ghost">RGB'den</button>
+      <button type="button" id="from-unity" class="ghost">Unity'den</button>
+      <button type="button" id="color-copy" class="ghost">Kopyala</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
