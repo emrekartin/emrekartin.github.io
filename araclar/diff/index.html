@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{if(localStorage.getItem("ek-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diff — Emre Kartın</title>
+  <meta name="description" content="İki metnin satır farkı. Karşılaştırma tarayıcıda kalır." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=13" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Diff</h1>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="diff-a">Eski</label>
+        <textarea id="diff-a" class="mono" spellcheck="false"></textarea>
+      </div>
+      <div class="field">
+        <label for="diff-b">Yeni</label>
+        <textarea id="diff-b" class="mono" spellcheck="false"></textarea>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" id="diff-run">Karşılaştır</button>
+    </div>
+    <p id="diff-status" class="status" aria-live="polite"></p>
+    <p id="diff-error" class="error" role="alert"></p>
+    <div id="diff-out" class="diff-out"></div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+  <script src="/site.js?v=1"></script>
+</body>
+</html>
