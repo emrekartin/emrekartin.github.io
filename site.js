@@ -16,6 +16,7 @@
     ["JWT", "/araclar/jwt/", "Header ve payload oku", "jwt token"],
     ["Diff", "/araclar/diff/", "İki metnin farkı", "diff fark karsilastir compare"],
     ["Regex", "/araclar/regex/", "Deseni metinde dene", "regex regexp duzenli ifade"],
+    ["Resim", "/araclar/resim/", "Küçült, sıkıştır, format değiştir", "resim gorsel foto image compress sikistir kucult boyut jpeg jpg webp png donustur"],
     ["Unix", "/araclar/unix/", "Timestamp ve tarih", "unix timestamp epoch zaman"],
     ["Cron", "/araclar/cron/", "İfadeyi cümleye çevir", "cron zamanlama"],
     ["Yaş", "/araclar/yas/", "Doğum tarihinden yaş", "yas dogum gunu"],

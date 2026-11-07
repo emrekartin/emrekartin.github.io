@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resim — Emre Kartın</title>
+  <meta name="description" content="Resmi küçült, sıkıştır, JPEG, WebP veya PNG'ye çevir. Dosyalar yüklenmez, tarayıcında işlenir." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=20" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Resim</h1>
+
+    <label class="drop" id="img-drop" for="img-file">
+      <input id="img-file" type="file" accept="image/*" multiple />
+      <strong>Resim seç veya buraya bırak</strong>
+      <span>Yapıştırmak için Ctrl V. Dosyalar yüklenmez, bu tarayıcıda işlenir.</span>
+    </label>
+
+    <div class="row-3">
+      <div class="field">
+        <label for="img-format">Format</label>
+        <select id="img-format">
+          <option value="auto" selected>Aynı kalsın</option>
+          <option value="image/jpeg">JPEG</option>
+          <option value="image/webp">WebP</option>
+          <option value="image/png">PNG</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="img-size">En uzun kenar (px)</label>
+        <input id="img-size" type="number" min="16" max="10000" step="1" placeholder="Değişmesin" />
+      </div>
+      <div class="field">
+        <label for="img-quality">Kalite <span id="img-quality-value">80</span></label>
+        <input id="img-quality" type="range" min="10" max="100" step="5" value="80" />
+      </div>
+    </div>
+    <p class="status" id="img-note">Kalite JPEG ve WebP'de geçerli. PNG kayıpsızdır, kalite onu etkilemez.</p>
+
+    <div class="actions">
+      <button type="button" id="img-all" disabled>Tümünü indir</button>
+      <button type="button" id="img-clear" class="ghost" disabled>Temizle</button>
+    </div>
+    <p id="img-out" class="status" aria-live="polite"></p>
+    <p id="img-error" class="error" role="alert"></p>
+
+    <ul id="img-list" class="img-list"></ul>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+<script src="/site.js?v=5"></script>
+</body>
+</html>
