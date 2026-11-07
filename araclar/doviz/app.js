@@ -51,14 +51,15 @@
     return n.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: max });
   }
 
-  function day(iso) {
-    var parts = iso.split("-");
-    return Number(parts[2]) + " " + months[Number(parts[1]) - 1] + " " + parts[0];
+  function stamp() {
+    var d = new Date();
+    var clock = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+    return d.getDate() + " " + months[d.getMonth()] + " " + clock;
   }
 
-  function show(amount, from, to, rate, iso) {
+  function show(amount, from, to, rate) {
     outEl.textContent = num(amount) + " " + from + " = " + num(amount * rate) + " " + to +
-      " · 1 " + from + " = " + num(rate) + " " + to + " · ECB, " + day(iso);
+      " · 1 " + from + " = " + num(rate) + " " + to + " · Coinbase, " + stamp();
   }
 
   function run() {
@@ -77,15 +78,16 @@
     }
     runBtn.disabled = true;
     outEl.textContent = "Kur alınıyor.";
-    fetch("https://api.frankfurter.dev/v1/latest?from=" + from + "&to=" + to)
+    fetch("https://api.coinbase.com/v2/exchange-rates?currency=" + from)
       .then(function (response) {
         if (!response.ok) throw new Error("bad");
         return response.json();
       })
       .then(function (data) {
-        var rate = data.rates && data.rates[to];
-        if (!rate || !data.date) throw new Error("empty");
-        show(amount, from, to, rate, data.date);
+        var raw = data.data && data.data.rates && data.data.rates[to];
+        var rate = Number(raw);
+        if (!rate) throw new Error("empty");
+        show(amount, from, to, rate);
       })
       .catch(function () {
         outEl.textContent = "";
