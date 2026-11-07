@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fund Tax Calculator — Emre Kartın</title>
+  <meta name="description" content="Fon bozdurunca kazanç üzerinden stopaj hesabı." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=9" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Fund Tax Calculator</h1>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="fund-buy">Alış</label>
+        <input id="fund-buy" class="mono" type="text" inputmode="decimal" placeholder="100000" />
+      </div>
+      <div class="field">
+        <label for="fund-sell">Satış</label>
+        <input id="fund-sell" class="mono" type="text" inputmode="decimal" placeholder="140000" />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="fund-kind">Fon</label>
+        <select id="fund-kind">
+          <option value="0">Hisse yoğun, TEFAS</option>
+          <option value="17.5" selected>Diğer fon</option>
+          <option value="0">GSYF / GYF, 2 yıl ve üzeri</option>
+          <option value="17.5">GSYF / GYF, 2 yıldan kısa</option>
+          <option value="17.5">Serbest hisse, TEFAS dışı</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fund-rate">Stopaj</label>
+        <input id="fund-rate" class="mono" type="text" inputmode="decimal" value="17,5" />
+      </div>
+    </div>
+    <p id="fund-out" class="status" aria-live="polite"></p>
+    <p id="fund-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="fund-run">Hesapla</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

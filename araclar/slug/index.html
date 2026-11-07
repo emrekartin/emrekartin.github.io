@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Slug Generator — Emre Kartın</title>
+  <meta name="description" content="Türkçe başlığı adres parçasına çevirir." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=9" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Slug Generator</h1>
+
+    <div class="field">
+      <label for="slug-in">Başlık</label>
+      <input id="slug-in" type="text" placeholder="Çalışma Notları 2026" />
+    </div>
+    <div class="field">
+      <label for="slug-out">Adres</label>
+      <input id="slug-out" class="mono" type="text" readonly />
+    </div>
+    <p id="slug-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="slug-run">Üret</button>
+      <button type="button" id="slug-copy" class="ghost">Kopyala</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

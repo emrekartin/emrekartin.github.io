@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deposit Calculator — Emre Kartın</title>
+  <meta name="description" content="Vadeli hesap faizi. Brüt, stopaj ve vade sonu." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=9" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Deposit Calculator</h1>
+
+    <div class="field">
+      <label for="dep-amount">Anapara</label>
+      <input id="dep-amount" class="mono" type="text" inputmode="decimal" placeholder="100000" />
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="dep-rate">Yıllık faiz</label>
+        <input id="dep-rate" class="mono" type="text" inputmode="decimal" placeholder="45" />
+      </div>
+      <div class="field">
+        <label for="dep-days">Gün</label>
+        <input id="dep-days" class="mono" type="text" inputmode="numeric" placeholder="32" value="32" />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="dep-ccy">Para</label>
+        <select id="dep-ccy">
+          <option value="try" selected>TL</option>
+          <option value="fx">Döviz</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="dep-tax">Stopaj</label>
+        <input id="dep-tax" class="mono" type="text" inputmode="decimal" value="17,5" />
+      </div>
+    </div>
+    <p id="dep-out" class="status" aria-live="polite"></p>
+    <p id="dep-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="dep-run">Hesapla</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

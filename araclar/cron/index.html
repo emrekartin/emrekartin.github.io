@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cron Reader — Emre Kartın</title>
+  <meta name="description" content="Cron ifadesini cümleye çevirir." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=9" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Cron Reader</h1>
+
+    <div class="field">
+      <label for="cron-in">İfade</label>
+      <input id="cron-in" class="mono" type="text" placeholder="0 9 * * 1-5" spellcheck="false" />
+    </div>
+    <p id="cron-out" class="status" aria-live="polite"></p>
+    <p id="cron-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="cron-run">Oku</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

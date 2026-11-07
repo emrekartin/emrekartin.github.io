@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Case Converter — Emre Kartın</title>
+  <meta name="description" content="Metni camelCase, snake_case ve kebab-case yapar." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css?v=9" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Software Developer · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Case Converter</h1>
+
+    <div class="field">
+      <label for="case-in">Metin</label>
+      <input id="case-in" class="mono" type="text" placeholder="emre kartın" />
+    </div>
+    <div class="field">
+      <label for="case-camel">camelCase</label>
+      <input id="case-camel" class="mono" type="text" readonly />
+    </div>
+    <div class="field">
+      <label for="case-snake">snake_case</label>
+      <input id="case-snake" class="mono" type="text" readonly />
+    </div>
+    <div class="field">
+      <label for="case-kebab">kebab-case</label>
+      <input id="case-kebab" class="mono" type="text" readonly />
+    </div>
+    <p id="case-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="case-run">Çevir</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
