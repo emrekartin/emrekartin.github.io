@@ -63,9 +63,18 @@
     initial: "4-3-3",
     keeper: true,
     ratio: 1.4,
-    field: function (c, PX, PY, S) {
+    surface: "#23874a",
+    stripe: 0.88,
+    presets: [
+      { name: "Çim", a: "#23874a" },
+      { name: "Koyu çim", a: "#17603a" },
+      { name: "Sentetik", a: "#3aa856" },
+      { name: "Toprak saha", a: "#9a6a3f" },
+      { name: "Mavi saha", a: "#1f5fa8" }
+    ],
+    field: function (c, PX, PY, S, col) {
       for (var i = 0; i < 14; i++) {
-        c.fillStyle = i % 2 ? "#1f7a3f" : "#23874a";
+        c.fillStyle = i % 2 ? col.b : col.a;
         c.fillRect(PX, PY + i * 10 * S, 100 * S, 10 * S);
       }
       c.strokeStyle = "rgba(255,255,255,0.85)";

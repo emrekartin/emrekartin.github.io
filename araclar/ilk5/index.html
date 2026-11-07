@@ -12,7 +12,7 @@
   <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/site.css?v=19" />
+  <link rel="stylesheet" href="/site.css?v=26" />
 </head>
 <body>
   <div class="wrap">
@@ -66,6 +66,16 @@
         <input id="xi-color2" type="color" value="#ffc72c" />
       </div>
     </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="xi-surface">Saha rengi</label>
+        <input id="xi-surface" type="color" value="#dba567" />
+      </div>
+      <div class="field">
+        <label for="xi-paint">Boya alanı</label>
+        <input id="xi-paint" type="color" value="#b87d4a" />
+      </div>
+    </div>
 
     <div id="xi-pitch" class="field-pitch xi-court">
       <svg class="field-lines" viewBox="0 0 100 94" preserveAspectRatio="none" aria-hidden="true">
@@ -92,17 +102,15 @@
     <h2 class="pitch-title">Oyuncular</h2>
     <div id="xi-slots" class="xi-slots"></div>
 
-    <div class="field">
-      <label for="xi-bench">Yedekler</label>
-      <textarea id="xi-bench" placeholder="Her satıra bir oyuncu" spellcheck="false"></textarea>
-    </div>
+    <h2 class="pitch-title">Yedekler</h2>
+    <div id="xi-bench" class="xi-slots"></div>
 
     <footer class="site-footer">
       <a href="/araclar/">← Kullanılabilir araçlar</a>
     </footer>
   </div>
-  <script src="/araclar/dizilis.js"></script>
-  <script src="./app.js"></script>
-<script src="/site.js?v=7"></script>
+  <script src="/araclar/dizilis.js?v=3"></script>
+  <script src="./app.js?v=2"></script>
+<script src="/site.js?v=10"></script>
 </body>
 </html>

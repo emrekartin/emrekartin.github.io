@@ -17,12 +17,21 @@
     initial: "Standart",
     keeper: false,
     ratio: 0.94,
-    field: function (c, PX, PY, S) {
+    surface: "#dba567",
+    stripe: 0.96,
+    presets: [
+      { name: "Parke", a: "#dba567", paint: "#b87d4a" },
+      { name: "Koyu parke", a: "#a8693a", paint: "#6e3d1f" },
+      { name: "Açık parke", a: "#ecc893", paint: "#1d428a" },
+      { name: "Mavi zemin", a: "#2d5aa8", paint: "#e2711d" },
+      { name: "Sokak asfaltı", a: "#5b6470", paint: "#b0413e" }
+    ],
+    field: function (c, PX, PY, S, col) {
       for (var i = 0; i < 20; i++) {
-        c.fillStyle = i % 2 ? "#d39a5e" : "#dba567";
+        c.fillStyle = i % 2 ? col.b : col.a;
         c.fillRect(PX + i * 5 * S, PY, 5 * S, 94 * S);
       }
-      c.fillStyle = "rgba(120, 50, 20, 0.35)";
+      c.fillStyle = col.paint || "#b87d4a";
       c.fillRect(PX + 34 * S, PY + 2 * S, 32 * S, 36 * S);
       c.strokeStyle = "#fff";
       c.lineWidth = 3;
