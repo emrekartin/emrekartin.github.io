@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Listeden Seç — Emre Kartın</title>
+  <meta name="description" content="Listedeki satırlardan rastgele seçer. Tekrar etmez." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=12" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Listeden Seç</h1>
+
+    <div class="field">
+      <label for="pick-list">Liste</label>
+      <textarea id="pick-list" placeholder="Her satıra bir seçenek"></textarea>
+    </div>
+    <div class="field">
+      <label for="pick-count">Adet</label>
+      <input id="pick-count" type="number" min="1" max="50" value="1" />
+    </div>
+    <p id="pick-out" class="status" aria-live="polite"></p>
+    <p id="pick-error" class="error" role="alert"></p>
+    <div class="actions">
+      <button type="button" id="pick-run">Seç</button>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
