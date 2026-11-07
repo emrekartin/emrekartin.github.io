@@ -8,6 +8,9 @@
   var promoEl = document.getElementById("c-promo");
   var takenTop = document.getElementById("c-taken-top");
   var takenBottom = document.getElementById("c-taken-bottom");
+  var timeEl = document.getElementById("c-time");
+  var clockTop = document.getElementById("c-clock-top");
+  var clockBottom = document.getElementById("c-clock-bottom");
   var KEY = "ek-satranc";
 
   var GLYPH = { k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟\uFE0E" };
@@ -266,8 +269,83 @@
   // ---- oyun durumu ----
   var state, history, seen, selected = -1, targets = [], lastMove = null, over = false, thinking = false, pendingPromo = null;
   var mode = "ai", mySide = "w", online = null;
+  var tc = null, clock = { w: 0, b: 0 }, running = "", tickFrom = 0, timer = 0, flagged = "";
 
   function repeats(k) { return seen[k] || 0; }
+
+  // ---- saat ----
+  function parseTc(v) {
+    var m = /^(\d+)\+(\d+)$/.exec(v || "");
+    return m ? { base: Number(m[1]) * 60000, inc: Number(m[2]) * 1000 } : null;
+  }
+
+  function left(side) {
+    return clock[side] - (running === side ? Date.now() - tickFrom : 0);
+  }
+
+  function resetClock() {
+    tc = parseTc(timeEl.value);
+    clock = { w: tc ? tc.base : 0, b: tc ? tc.base : 0 };
+    running = "";
+    flagged = "";
+    stopTimer();
+  }
+
+  function startTimer() {
+    if (!timer) timer = setInterval(tick, 100);
+  }
+
+  function stopTimer() {
+    if (running) clock[running] = Math.max(0, left(running));
+    running = "";
+    clearInterval(timer);
+    timer = 0;
+  }
+
+  function startRunning(side) {
+    running = side;
+    tickFrom = Date.now();
+    startTimer();
+  }
+
+  function tick() {
+    renderClocks();
+    if (!running || left(running) > 0) return;
+    if (mode === "online" && running !== mySide) return;
+    flag(running);
+  }
+
+  function flag(side) {
+    if (over || flagged) return;
+    stopTimer();
+    clock[side] = 0;
+    flagged = side;
+    selected = -1;
+    targets = [];
+    if (mode === "online" && side === mySide) online.send({ t: "flag" });
+    render();
+  }
+
+  function fmt(ms) {
+    if (ms <= 0) return "0:00";
+    if (ms < 10000) return (Math.floor(ms / 100) / 10).toFixed(1).replace(".", ",");
+    var s = Math.ceil(ms / 1000);
+    var h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, sec = s % 60;
+    return (h ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (sec < 10 ? "0" : "") + sec;
+  }
+
+  function renderClocks() {
+    clockTop.hidden = clockBottom.hidden = !tc;
+    if (!tc) return;
+    var bottom = flipped() ? "b" : "w";
+    [[clockBottom, bottom], [clockTop, other(bottom)]].forEach(function (x) {
+      var ms = Math.max(0, left(x[1]));
+      x[0].textContent = fmt(ms);
+      x[0].classList.toggle("on", running === x[1]);
+      x[0].classList.toggle("low", ms < 10000);
+      x[0].setAttribute("aria-label", sideName(x[1]) + " saati " + fmt(ms));
+    });
+  }
 
   function sfx(name) {
     if (window.ekSes) window.ekSes(name);
@@ -281,6 +359,7 @@
   }
 
   function newGame() {
+    resetClock();
     state = initial();
     history = [];
     seen = {};
@@ -330,6 +409,7 @@
     renderTaken();
     undoEl.disabled = mode === "online" || !history.length || thinking;
     status();
+    renderClocks();
   }
 
   function renderTaken() {
@@ -357,6 +437,17 @@
     var moves = legal(state);
     var check = inCheck(state, state.turn);
     var text;
+    if (flagged) {
+      var winner = other(flagged);
+      var loneKing = !state.b.some(function (p) { return p && color(p) === winner && p.toLowerCase() !== "k"; });
+      text = "Süre bitti! " + (loneKing ? sideName(winner) + "da mat edecek taş yok. Berabere." : sideName(winner) + " kazandı.");
+      if (!over) {
+        over = true;
+        sfx(loneKing ? "nomatch" : mode === "local" || winner === mySide ? "win" : "lose");
+      }
+      statusEl.textContent = text;
+      return;
+    }
     if (!moves.length) {
       text = check ? "Şah mat! " + sideName(other(state.turn)) + " kazandı." : "Pat. Berabere.";
     } else if (state.half >= 100) {
@@ -375,21 +466,30 @@
     }
     if (!over) {
       over = true;
+      stopTimer();
       var mine = mode === "local" ? null : !moves.length && check ? state.turn !== mySide : null;
       sfx(mine === null ? (check && !moves.length ? "win" : "nomatch") : mine ? "win" : "lose");
     }
     statusEl.textContent = text;
   }
 
-  function play(m, remote) {
-    history.push({ state: state, last: lastMove });
+  function play(m, remote, remoteLeft) {
+    var mover = state.turn;
+    if (tc && !remote && running === mover && left(mover) <= 0) return flag(mover);
+    history.push({ state: state, last: lastMove, clock: { w: left("w"), b: left("b") } });
+    if (tc) {
+      clock[mover] = left(mover) + tc.inc;
+      if (remote && typeof remoteLeft === "number" && remoteLeft > 0) clock[mover] = remoteLeft;
+      running = "";
+    }
     var capture = !!m.cap;
     state = make(state, m);
     seen[key(state)] = repeats(key(state)) + 1;
     lastMove = { from: m.from, to: m.to };
     selected = -1;
     targets = [];
-    if (mode === "online" && !remote) online.send({ t: "move", from: m.from, to: m.to, promo: m.promo || "" });
+    if (mode === "online" && !remote) online.send({ t: "move", from: m.from, to: m.to, promo: m.promo || "", left: tc ? clock[mover] : 0 });
+    if (tc) startRunning(state.turn);
     render();
     if (!over) sfx(inCheck(state, state.turn) ? "flag" : capture ? "kick" : "flip");
     maybeAi();
@@ -450,13 +550,17 @@
   undoEl.addEventListener("click", function () {
     if (mode === "online" || !history.length || thinking) return;
     var steps = mode === "ai" ? (state.turn === mySide ? 2 : 1) : 1;
+    stopTimer();
     while (steps-- > 0 && history.length) {
       var k = key(state);
       seen[k] = Math.max(0, repeats(k) - 1);
       var h = history.pop();
       state = h.state;
       lastMove = h.last;
+      clock = h.clock;
     }
+    flagged = "";
+    if (tc && history.length) startRunning(state.turn);
     over = false;
     selected = -1;
     targets = [];
@@ -469,10 +573,15 @@
   function syncControls() {
     levelEl.hidden = mode !== "ai";
     sideEl.hidden = mode !== "ai";
+    timeEl.disabled = mode === "online" && online.role() === "guest";
   }
 
   function saveSettings() {
-    try { localStorage.setItem(KEY, JSON.stringify({ mode: mode === "online" ? "ai" : mode, level: levelEl.value, side: sideEl.value })); } catch (e) {}
+    try { localStorage.setItem(KEY, JSON.stringify({ mode: mode === "online" ? "ai" : mode, level: levelEl.value, side: sideEl.value, time: timeEl.value })); } catch (e) {}
+  }
+
+  function setTime(v) {
+    if (parseTc(v) || v === "0") timeEl.value = v;
   }
 
   function setMode(next) {
@@ -490,13 +599,18 @@
     newGame();
   });
   levelEl.addEventListener("change", saveSettings);
+  timeEl.addEventListener("change", function () {
+    saveSettings();
+    if (mode === "online" && online.connected()) online.send({ t: "new", time: timeEl.value });
+    newGame();
+  });
   sideEl.addEventListener("change", function () {
     setMode(mode);
     newGame();
   });
   document.getElementById("c-new").addEventListener("click", function () {
     if (mode === "online") {
-      if (online.connected()) online.send({ t: "new" });
+      if (online.connected()) online.send({ t: "new", time: timeEl.value });
       else online.host();
     }
     newGame();
@@ -507,24 +621,37 @@
     game: "satranc",
     onStart: function (role) {
       mySide = role === "guest" ? "b" : "w";
+      syncControls();
+      if (role === "host") online.send({ t: "new", time: timeEl.value });
       newGame();
     },
     onMessage: function (msg) {
-      if (msg.t === "new") return newGame();
+      if (msg.t === "new") {
+        setTime(msg.time);
+        return newGame();
+      }
       if (msg.t === "full") { statusEl.textContent = "Bu oda dolu."; return; }
-      if (msg.t !== "move" || state.turn === mySide) return;
+      if (msg.t === "flag") {
+        if (!over) flag(other(mySide));
+        return;
+      }
+      if (msg.t !== "move" || state.turn === mySide || over) return;
       var m = legal(state).filter(function (x) {
         return x.from === msg.from && x.to === msg.to && (x.promo || "") === (msg.promo || "");
       })[0];
-      if (m) play(m, true);
+      if (m) play(m, true, msg.left);
     },
-    onEnd: function () { render(); }
+    onEnd: function () {
+      stopTimer();
+      render();
+    }
   });
 
   try {
     var saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {};
     if (saved.level) levelEl.value = saved.level;
     if (saved.side) sideEl.value = saved.side;
+    if (saved.time) setTime(saved.time);
     if (saved.mode === "local" || saved.mode === "ai") mode = saved.mode;
   } catch (e) {}
   setMode(online.pending() ? "online" : mode);

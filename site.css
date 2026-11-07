@@ -1936,6 +1936,13 @@ button.toggle-on, button.toggle-on:hover { background: var(--ink); color: var(--
 .pw { color: #fff; -webkit-text-stroke: 1.2px #1f2937; text-shadow: 0 2px 3px rgba(0, 0, 0, 0.35); }
 .pb { color: #111827; text-shadow: 0 2px 3px rgba(0, 0, 0, 0.25); }
 .taken { min-height: 1.6rem; margin: 0.3rem auto; width: min(100%, 32rem); font-family: "Segoe UI Symbol", "DejaVu Sans", serif; font-size: 1.25rem; letter-spacing: -0.15em; }
+.side-row { display: flex; align-items: center; gap: 0.75rem; width: min(100%, 32rem); margin: 0.3rem auto; }
+.side-row .taken { flex: 1; width: auto; margin: 0; }
+.clock { min-width: 5.2rem; padding: 0.3rem 0.65rem; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--muted); font-family: var(--ui); font-size: 1.15rem; font-weight: 600; font-variant-numeric: tabular-nums; text-align: center; }
+.clock[hidden] { display: none; }
+.clock.on { border-color: var(--ink); background: var(--ink); color: var(--on-ink); }
+.clock.low { color: #dc2626; }
+.clock.on.low { border-color: #dc2626; background: #dc2626; color: #fff; }
 .promo { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.8rem; }
 .promo[hidden] { display: none; }
 .promo button { width: 3.4rem; height: 3.4rem; padding: 0; font-family: "Segoe UI Symbol", "DejaVu Sans", serif; font-size: 2.2rem; line-height: 1; }
