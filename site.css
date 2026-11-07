@@ -674,6 +674,13 @@ button.ghost:hover:not(:disabled) { background: var(--paper-2); border-color: va
   margin: 0 auto;
 }
 
+.preview canvas.qr-clear {
+  background: repeating-conic-gradient(#d9d9d9 0 25%, #fff 0 50%) 0 0 / 16px 16px;
+}
+
+.color-pair { flex-wrap: wrap; }
+.color-pair input[type="color"]:disabled { opacity: 0.3; }
+
 .preview-empty {
   display: grid;
   place-items: center;
@@ -1208,9 +1215,14 @@ input[type="color"]:disabled { opacity: 0.35; cursor: not-allowed; }
 .xi-slot input:nth-child(2) { text-align: center; }
 
 .xi-slot select.xi-pos {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: none;
   width: 100%;
   min-width: 0;
   padding: 0.45rem 0.1rem;
+  cursor: pointer;
+  text-align-last: center;
   font-size: 0.78rem;
   text-align: center;
 }

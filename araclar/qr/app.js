@@ -5,6 +5,7 @@
   var eccEl = document.getElementById("qr-ecc");
   var darkEl = document.getElementById("qr-dark");
   var lightEl = document.getElementById("qr-light");
+  var clearEl = document.getElementById("qr-clear");
   var statusEl = document.getElementById("qr-status");
   var warnEl = document.getElementById("qr-warn");
   var errorEl = document.getElementById("qr-error");
@@ -54,6 +55,9 @@
 
     var dark = hexOk(darkEl.value) ? darkEl.value : "#1c1916";
     var light = hexOk(lightEl.value) ? lightEl.value : "#fffdf8";
+    var clear = clearEl.checked;
+    lightEl.disabled = clear;
+    canvas.classList.toggle("qr-clear", clear);
 
     try {
       var qr = qrcode(0, eccEl.value);
@@ -76,8 +80,11 @@
     canvas.width = size;
     canvas.height = size;
     var ctx = canvas.getContext("2d");
-    ctx.fillStyle = light;
-    ctx.fillRect(0, 0, size, size);
+    ctx.clearRect(0, 0, size, size);
+    if (!clear) {
+      ctx.fillStyle = light;
+      ctx.fillRect(0, 0, size, size);
+    }
     ctx.fillStyle = dark;
     for (var r = 0; r < count; r += 1) {
       for (var c = 0; c < count; c += 1) {
@@ -96,12 +103,17 @@
     var bytes = new TextEncoder().encode(text).length;
     statusEl.textContent = "Sürüm " + version + " · " + eccEl.value + " · " + bytes + " bayt";
 
-    var ratio = contrast(dark, light);
-    if (ratio < 3) {
+    if (clear) {
+      if (contrast(dark, "#ffffff") < 3) {
+        warnEl.textContent = "Desen açık renk. Şeffaf kod yalnızca koyu bir zeminin üstünde okunur.";
+      } else {
+        statusEl.textContent += " · şeffaf zemin";
+      }
+    } else if (contrast(dark, light) < 3) {
       warnEl.textContent = "Kontrast düşük. Telefon kamerası bu renkleri kaçırabilir.";
     }
 
-    current = { qr: qr, dark: dark, light: light, margin: margin };
+    current = { qr: qr, dark: dark, light: clear ? "" : light, margin: margin };
   }
 
   function svgMarkup() {
@@ -120,7 +132,7 @@
     return (
       '<?xml version="1.0" encoding="UTF-8"?>\n' +
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + total + " " + total + '" shape-rendering="crispEdges">\n' +
-      '<rect width="100%" height="100%" fill="' + current.light + '"/>\n' +
+      (current.light ? '<rect width="100%" height="100%" fill="' + current.light + '"/>\n' : "") +
       '<path d="' + path + '" fill="' + current.dark + '"/>\n' +
       "</svg>\n"
     );
@@ -141,6 +153,7 @@
   eccEl.addEventListener("change", render);
   darkEl.addEventListener("input", render);
   lightEl.addEventListener("input", render);
+  clearEl.addEventListener("change", render);
 
   pngBtn.addEventListener("click", function () {
     if (!current) return;
