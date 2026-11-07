@@ -166,7 +166,8 @@
     find.className = "ghost";
     find.setAttribute("data-ek", "search");
     find.setAttribute("aria-label", "Araç ara");
-    find.innerHTML = lens + "<span>Ara</span><kbd>" + (mac ? "⌘K" : "Ctrl K") + "</kbd>";
+    find.innerHTML = lens;
+    find.title = "Ara (" + (mac ? "⌘K" : "Ctrl K") + ")";
     find.addEventListener("click", openSearch);
     parent.appendChild(find);
     parent.appendChild(theme);
