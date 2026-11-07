@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dama — Emre Kartın</title>
+  <meta name="description" content="Türk daması. Aynı cihazda iki kişi, bilgisayara karşı ya da link paylaşarak online oyna." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=32" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Dama</h1>
+
+    <div class="game-bar">
+      <select id="d-mode" aria-label="Oyun modu">
+        <option value="ai">Bilgisayar</option>
+        <option value="local">İki kişi</option>
+        <option value="online">Online</option>
+      </select>
+      <select id="d-level" aria-label="Zorluk">
+        <option value="1">Kolay</option>
+        <option value="2" selected>Orta</option>
+        <option value="3">Zor</option>
+      </select>
+      <select id="d-side" aria-label="Rengin">
+        <option value="w">Beyaz</option>
+        <option value="b">Siyah</option>
+      </select>
+      <span class="grow"></span>
+      <button type="button" id="d-undo" class="ghost">Geri al</button>
+      <button type="button" id="d-new">Yeni oyun</button>
+    </div>
+    <div id="d-online" class="online-box" hidden></div>
+    <p id="d-status" class="game-msg" aria-live="polite"></p>
+    <div id="d-board" class="board dama" role="grid" aria-label="Dama tahtası"></div>
+    <p class="game-help">Türk daması: taşlar ileri ve yana birer kare gider, geri gitmez. Taş almak zorunludur; birden fazla yol varsa en çok taş alan yol oynanmalı. Son sıraya varan taş dama olur ve düz çizgide istediği kadar gider. Online modda linki açan siyahlarla oynar.</p>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="/araclar/oyun-ses.js?v=1"></script>
+  <script src="/araclar/peerjs.min.js?v=1.5.5"></script>
+  <script src="/araclar/p2p.js?v=1"></script>
+  <script src="./app.js?v=1"></script>
+<script src="/site.js?v=12"></script>
+</body>
+</html>

@@ -1879,3 +1879,70 @@ button.toggle-on, button.toggle-on:hover { background: var(--ink); color: var(--
 .game-head .game-sound { flex: none; width: auto; display: inline-flex; align-items: center; justify-content: center; padding: 0.45rem; }
 .game-sound svg { width: 1.25rem; height: 1.25rem; }
 .game-sound[aria-pressed="false"] { color: var(--muted); }
+
+.snake-box.tall { width: min(100%, 22.5rem); }
+.snake-box.tall canvas { aspect-ratio: 2 / 3; background: #5ec4e8; }
+
+.online-box { margin: 0 0 0.9rem; padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: var(--card); font-family: var(--ui); }
+.online-status { margin: 0; font-size: 0.92rem; }
+.online-link { display: flex; gap: 0.5rem; margin-top: 0.55rem; }
+.online-link[hidden] { display: none; }
+.online-link input { flex: 1; min-width: 0; font-size: 0.85rem; }
+.online-link button { width: auto; }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: min(100%, 32rem);
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(18, 22, 28, 0.18);
+  user-select: none;
+}
+.board button,
+.board button:hover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+  font-family: "Segoe UI Symbol", "DejaVu Sans", "Noto Sans Symbols 2", serif;
+  font-size: min(9vw, 2.9rem);
+  line-height: 1;
+  cursor: pointer;
+}
+.board.chess .lt, .board.chess .lt:hover { background: #eedab5; }
+.board.chess .dk, .board.chess .dk:hover { background: #b58863; }
+.board.dama .lt, .board.dama .lt:hover { background: #f3d9a4; }
+.board.dama .dk, .board.dama .dk:hover { background: #d9a85c; }
+.board .last { background-image: linear-gradient(rgba(250, 204, 21, 0.38), rgba(250, 204, 21, 0.38)) !important; }
+.board .gone { background-image: linear-gradient(rgba(239, 68, 68, 0.22), rgba(239, 68, 68, 0.22)) !important; }
+.board .sel { box-shadow: inset 0 0 0 4px #2563eb !important; }
+.board .must { box-shadow: inset 0 0 0 3px #16a34a !important; }
+.board .check { background-image: radial-gradient(circle, #ef4444 0%, rgba(239, 68, 68, 0.5) 45%, transparent 75%) !important; }
+.board .dot::after { content: ""; position: absolute; width: 28%; height: 28%; border-radius: 50%; background: rgba(18, 22, 28, 0.28); pointer-events: none; }
+.board .hit::after { content: ""; position: absolute; inset: 5%; border: 4px solid rgba(18, 22, 28, 0.28); border-radius: 50%; pointer-events: none; }
+.board [data-rank]::before { content: attr(data-rank); position: absolute; top: 2px; left: 3px; font-family: var(--ui); font-size: 0.6rem; font-weight: 700; opacity: 0.55; color: #3b2a1a; }
+.board [data-file]::before { content: attr(data-file); position: absolute; right: 3px; bottom: 1px; font-family: var(--ui); font-size: 0.6rem; font-weight: 700; opacity: 0.55; color: #3b2a1a; }
+.board [data-rank][data-file]::before { content: attr(data-rank); right: auto; bottom: auto; }
+.board [data-rank][data-file]:not(.dot):not(.hit)::after { content: attr(data-file); position: absolute; right: 3px; bottom: 1px; font-family: var(--ui); font-size: 0.6rem; font-weight: 700; opacity: 0.55; color: #3b2a1a; }
+.pw { color: #fff; -webkit-text-stroke: 1.2px #1f2937; text-shadow: 0 2px 3px rgba(0, 0, 0, 0.35); }
+.pb { color: #111827; text-shadow: 0 2px 3px rgba(0, 0, 0, 0.25); }
+.taken { min-height: 1.6rem; margin: 0.3rem auto; width: min(100%, 32rem); font-family: "Segoe UI Symbol", "DejaVu Sans", serif; font-size: 1.25rem; letter-spacing: -0.15em; }
+.promo { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.8rem; }
+.promo[hidden] { display: none; }
+.promo button { width: 3.4rem; height: 3.4rem; padding: 0; font-family: "Segoe UI Symbol", "DejaVu Sans", serif; font-size: 2.2rem; line-height: 1; }
+
+.disc { position: relative; width: 74%; height: 74%; border-radius: 50%; pointer-events: none; }
+.disc.dw { background: radial-gradient(circle at 35% 30%, #ffffff, #e5e7eb 60%, #cbd5e1); box-shadow: 0 3px 0 #94a3b8, 0 5px 8px rgba(0, 0, 0, 0.3); }
+.disc.db { background: radial-gradient(circle at 35% 30%, #4b5563, #1f2937 60%, #0b0f14); box-shadow: 0 3px 0 #000, 0 5px 8px rgba(0, 0, 0, 0.35); }
+.disc::before { content: ""; position: absolute; inset: 18%; border-radius: 50%; border: 2px solid rgba(0, 0, 0, 0.12); }
+.disc.db::before { border-color: rgba(255, 255, 255, 0.12); }
+.disc.king::after { content: "♛"; position: absolute; inset: 0; display: grid; place-items: center; font-family: "Segoe UI Symbol", "DejaVu Sans", serif; font-size: min(5.5vw, 1.7rem); color: #d97706; }.game-bar [hidden] { display: none !important; }

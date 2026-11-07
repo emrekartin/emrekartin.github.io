@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Uçan Kuş — Emre Kartın</title>
+  <meta name="description" content="Flappy Bird tarzı oyun. Dokunarak kanat çırp, borulara çarpmadan aradan geç." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=32" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Uçan Kuş</h1>
+
+    <div class="game-bar">
+      <div class="game-stat"><span>Skor</span><strong id="f-score">0</strong></div>
+      <div class="game-stat"><span>En iyi</span><strong id="f-best">0</strong></div>
+    </div>
+    <div class="snake-box tall">
+      <canvas id="f-canvas" width="360" height="540" aria-label="Uçan kuş oyunu"></canvas>
+      <div id="f-over" class="snake-over">Başlamak için dokun ya da Boşluk</div>
+    </div>
+    <p class="game-help">Tıkla, dokun ya da Boşluk / ↑: kanat çırp · P: duraklat</p>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="/araclar/oyun-ses.js?v=1"></script>
+  <script src="./app.js?v=1"></script>
+<script src="/site.js?v=12"></script>
+</body>
+</html>
