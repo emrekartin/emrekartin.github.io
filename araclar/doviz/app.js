@@ -77,7 +77,7 @@
     }
     runBtn.disabled = true;
     outEl.textContent = "Kur alınıyor.";
-    fetch("https://api.frankfurter.app/latest?from=" + from + "&to=" + to)
+    fetch("https://api.frankfurter.dev/v1/latest?from=" + from + "&to=" + to)
       .then(function (response) {
         if (!response.ok) throw new Error("bad");
         return response.json();
