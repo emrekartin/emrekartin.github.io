@@ -1307,6 +1307,10 @@ input[type="range"] {
 
 .vid-credit { margin-top: 1.4rem; font-size: 0.85rem; }
 
+.re-examples { align-items: center; margin: 0 0 0.4rem; }
+.re-examples span { color: var(--muted); font-family: var(--ui); font-size: 0.9rem; }
+.re-examples button { padding: 0.4rem 0.75rem; }
+
 .actions label {
   display: inline-flex;
   align-items: center;

@@ -12,7 +12,7 @@
   <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/site.css?v=14" />
+  <link rel="stylesheet" href="/site.css?v=22" />
 </head>
 <body>
   <div class="wrap">
@@ -29,6 +29,16 @@
     </header>
 
     <h1 class="page-title">Regex</h1>
+
+    <div class="actions re-examples">
+      <span>Örnek:</span>
+      <button type="button" class="ghost" data-ex="mail">E-posta</button>
+      <button type="button" class="ghost" data-ex="tel">Telefon</button>
+      <button type="button" class="ghost" data-ex="date">Tarih</button>
+      <button type="button" class="ghost" data-ex="price">Fiyat</button>
+      <button type="button" class="ghost" data-ex="plate">Plaka</button>
+    </div>
+    <p id="re-hint" class="status"></p>
 
     <div class="field">
       <label for="re-pattern">Desen</label>
@@ -54,7 +64,7 @@
       <a href="/araclar/">← Kullanılabilir araçlar</a>
     </footer>
   </div>
-  <script src="./app.js"></script>
+  <script src="./app.js?v=3"></script>
   <script src="/site.js?v=7"></script>
 </body>
 </html>
