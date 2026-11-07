@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="tr" translate="no">
-<script>try{if(localStorage.getItem("ek-theme")=="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <head>
   <meta charset="utf-8" />
   <meta name="google" content="notranslate" />
@@ -12,7 +12,7 @@
 <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/site.css?v=13" />
+  <link rel="stylesheet" href="/site.css?v=14" />
 </head>
 <body>
   <div class="wrap">
@@ -23,7 +23,8 @@
       </a>
       <nav class="nav" aria-label="Site">
         <a href="/">Ana sayfa</a>
-        <a href="/araclar/" aria-current="page">Kullanılabilir araçlar</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
       </nav>
     </header>
 
@@ -60,17 +61,17 @@
         </select>
       </div>
     </div>
-    <p id="int-out" class="status" aria-live="polite"></p>
-    <p id="int-error" class="error" role="alert"></p>
     <div class="actions">
       <button type="button" id="int-run">Hesapla</button>
     </div>
+    <p id="int-out" class="status" aria-live="polite"></p>
+    <p id="int-error" class="error" role="alert"></p>
 
     <footer class="site-footer">
       <a href="/araclar/">← Kullanılabilir araçlar</a>
     </footer>
   </div>
   <script src="./app.js"></script>
-<script src="/site.js?v=1"></script>
+<script src="/site.js?v=2"></script>
 </body>
 </html>
