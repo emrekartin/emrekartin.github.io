@@ -4,7 +4,8 @@
     { id: "length", name: "Uzunluk", units: [
       ["mm", "Milimetre", 0.001], ["cm", "Santimetre", 0.01], ["m", "Metre", 1], ["km", "Kilometre", 1000],
       ["in", "İnç", 0.0254], ["ft", "Ayak (feet)", 0.3048], ["yd", "Yarda", 0.9144],
-      ["mi", "Mil", 1609.344], ["nmi", "Deniz mili", 1852]
+      ["mi", "Mil", 1609.344], ["nmi", "Deniz mili", 1852],
+      ["au", "Astronomik birim", 149597870700], ["ly", "Işık yılı", 9460730472580800], ["pc", "Parsek", 3.0856775814913673e16]
     ] },
     { id: "mass", name: "Ağırlık", units: [
       ["mg", "Miligram", 1e-6], ["g", "Gram", 0.001], ["kg", "Kilogram", 1], ["t", "Ton", 1000],
@@ -26,6 +27,10 @@
     { id: "speed", name: "Hız", units: [
       ["ms", "Metre / saniye", 1], ["kmh", "Kilometre / saat", 1 / 3.6], ["mph", "Mil / saat", 0.44704],
       ["kn", "Knot", 1852 / 3600], ["fts", "Ayak / saniye", 0.3048]
+    ] },
+    { id: "fuel", name: "Yakıt tüketimi", units: [
+      ["l100", "Litre / 100 km"], ["kml", "Kilometre / litre", 100],
+      ["mpgus", "Mil / galon (ABD)", 100 * 3.785411784 / 1.609344], ["mpguk", "Mil / galon (İngiliz)", 100 * 4.54609 / 1.609344]
     ] },
     { id: "data", name: "Veri", units: [
       ["bit", "Bit", 0.125], ["B", "Bayt", 1], ["KB", "Kilobayt (KB)", 1e3], ["MB", "Megabayt (MB)", 1e6],
@@ -50,7 +55,7 @@
   ];
 
   var DEFAULTS = {
-    length: "m", mass: "kg", temp: "C", area: "m2", volume: "l", speed: "kmh",
+    length: "m", mass: "kg", temp: "C", area: "m2", volume: "l", speed: "kmh", fuel: "l100",
     data: "MB", time: "h", energy: "kcal", pressure: "bar", power: "kW"
   };
 
@@ -60,8 +65,11 @@
   var outEl = document.getElementById("unit-out");
   var errorEl = document.getElementById("unit-error");
   var listEl = document.getElementById("unit-list");
-  var display = new Intl.NumberFormat("tr-TR", { maximumSignificantDigits: 10 });
-  var plain = new Intl.NumberFormat("tr-TR", { maximumSignificantDigits: 10, useGrouping: false });
+  var display = [new Intl.NumberFormat("tr-TR", { maximumSignificantDigits: 10 }), new Intl.NumberFormat("tr-TR", { maximumSignificantDigits: 13 })];
+  var plain = [
+    new Intl.NumberFormat("tr-TR", { maximumSignificantDigits: 10, useGrouping: false }),
+    new Intl.NumberFormat("tr-TR", { maximumSignificantDigits: 13, useGrouping: false })
+  ];
 
   catEl.innerHTML = CATS.map(function (c) { return '<option value="' + c.id + '">' + c.name + "</option>"; }).join("");
 
@@ -90,6 +98,11 @@
   function convert(v, from, to) {
     var c = cat();
     if (c.id === "temp") return fromC(toC(v, from), to);
+    if (c.id === "fuel") {
+      var k = function (id) { return c.units.find(function (u) { return u[0] === id; })[2]; };
+      var l100 = from === "l100" ? v : k(from) / v;
+      return to === "l100" ? l100 : k(to) / l100;
+    }
     var f = c.units.find(function (u) { return u[0] === from; })[2];
     var t = c.units.find(function (u) { return u[0] === to; })[2];
     return v * f / t;
@@ -99,7 +112,7 @@
     if (x === 0) return "0";
     var a = Math.abs(x);
     if (a >= 1e15 || a < 1e-6) return x.toExponential(6).replace(/\.?0+e/, "e").replace(".", ",");
-    return nf.format(x);
+    return nf[a >= 1e9 ? 1 : 0].format(x);
   }
 
   function esc(s) {
@@ -120,6 +133,11 @@
     if (cat().id === "temp" && toC(v, fromEl.value) < -273.15) {
       listEl.innerHTML = "";
       errorEl.textContent = "Mutlak sıfırın (−273,15 °C) altı olmaz.";
+      return;
+    }
+    if (cat().id === "fuel" && v <= 0) {
+      listEl.innerHTML = "";
+      errorEl.textContent = "Tüketim sıfırdan büyük olmalı.";
       return;
     }
     listEl.innerHTML = cat().units.filter(function (u) { return u[0] !== fromEl.value; }).map(function (u) {

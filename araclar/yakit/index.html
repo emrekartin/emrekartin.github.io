@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yakıt — Emre Kartın</title>
+  <meta name="description" content="Yol masrafını ya da aracın 100 kilometrede kaç litre yaktığını hesaplar." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=24" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Yakıt</h1>
+
+    <div class="field">
+      <label for="fuel-mode">Ne hesaplansın?</label>
+      <select id="fuel-mode">
+        <option value="cost">Yol masrafı</option>
+        <option value="rate">Aracım kaç yakıyor?</option>
+      </select>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="fuel-km">Yol (km)</label>
+        <input id="fuel-km" class="mono" type="text" inputmode="decimal" placeholder="450" autocomplete="off" />
+      </div>
+      <div class="field" data-mode="cost">
+        <label for="fuel-rate">Tüketim (L / 100 km)</label>
+        <input id="fuel-rate" class="mono" type="text" inputmode="decimal" placeholder="6,5" autocomplete="off" />
+      </div>
+      <div class="field" data-mode="rate" hidden>
+        <label for="fuel-liters">Harcanan yakıt (litre)</label>
+        <input id="fuel-liters" class="mono" type="text" inputmode="decimal" placeholder="31" autocomplete="off" />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="fuel-price">Litre fiyatı (TL)</label>
+        <input id="fuel-price" class="mono" type="text" inputmode="decimal" placeholder="İsteğe bağlı" autocomplete="off" />
+      </div>
+      <div class="field" data-mode="cost">
+        <label for="fuel-people">Kişi sayısı</label>
+        <input id="fuel-people" class="mono" type="text" inputmode="numeric" placeholder="İsteğe bağlı" autocomplete="off" />
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" id="fuel-run">Hesapla</button>
+    </div>
+    <p id="fuel-out" class="status" aria-live="polite"></p>
+    <p id="fuel-error" class="error" role="alert"></p>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js?v=1"></script>
+<script src="/site.js?v=10"></script>
+</body>
+</html>

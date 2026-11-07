@@ -26,7 +26,7 @@
     ["Saat Ekle", "/araclar/saatekle/", "Saate saat, dakika ekle", "saat ekle cikar dakika topla"],
     ["Tarih Ekle", "/araclar/gun/", "Tarihe gün, ay, yıl ekle", "tarih ekle gun ay yil"],
     ["İş Günü", "/araclar/isgunu/", "Tatiller düşülmüş iş günü", "is gunu resmi tatil bayram"],
-    ["Birim Çevir", "/araclar/birim/", "Uzunluk, ağırlık, sıcaklık, veri", "birim cevir donustur uzunluk agirlik sicaklik alan hacim hiz veri zaman enerji basinc guc metre inc kg libre celsius fahrenhayt"],
+    ["Birim Çevir", "/araclar/birim/", "Uzunluk, ağırlık, sıcaklık, veri", "birim cevir donustur uzunluk agirlik sicaklik alan hacim hiz veri zaman enerji basinc guc metre inc kg libre celsius fahrenhayt isik yili parsek yakit tuketimi mpg"],
     ["Base", "/araclar/taban/", "Decimal, hex, binary", "base taban hex binary decimal ikili onluk"],
     ["Renk", "/araclar/renk/", "Hex, RGB, Unity Color", "renk color hex rgb unity"],
     ["Quaternion", "/araclar/quaternion/", "Euler ve quaternion", "quaternion euler unity rotation"],
@@ -44,7 +44,8 @@
     ["Faiz", "/araclar/faiz/", "Basit veya bileşik faiz", "faiz bilesik"],
     ["Vadeli Hesap", "/araclar/vadeli/", "Net getiri, stopaj", "vadeli mevduat faiz"],
     ["İndirim", "/araclar/indirim/", "İndirimli tutar", "indirim yuzde"],
-    ["Taksit", "/araclar/taksit/", "Aylık taksit, toplam", "taksit kredi"]
+    ["Taksit", "/araclar/taksit/", "Aylık taksit, toplam", "taksit kredi"],
+    ["Yakıt", "/araclar/yakit/", "Yol masrafı, 100 km tüketim", "yakit benzin mazot dizel lpg tuketim yol masrafi litre 100 km"]
   ];
 
   var enterTarget = {
