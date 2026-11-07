@@ -1651,17 +1651,24 @@ html[data-theme="dark"] .warn { color: #e0b060; }
   touch-action: manipulation;
 }
 
+.mine-wrap {
+  position: relative;
+  left: 50%;
+  width: min(calc(100vw - 2.5rem), 64rem);
+  transform: translateX(-50%);
+}
+
 .mine-grid button,
 .mine-grid button:hover {
-  width: 1.85rem;
-  height: 1.85rem;
+  width: var(--cell, 1.85rem);
+  height: var(--cell, 1.85rem);
   padding: 0;
   border: 0;
   border-radius: 4px;
   background: #c9d2dd;
   color: #12161c;
   font-family: var(--ui);
-  font-size: 0.9rem;
+  font-size: calc(var(--cell, 1.85rem) * 0.5);
   font-weight: 800;
   line-height: 1;
 }

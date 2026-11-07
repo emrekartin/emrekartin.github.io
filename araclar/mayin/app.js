@@ -39,8 +39,19 @@
     return out;
   }
 
+  function cellFor(cols) {
+    var avail = gridEl.parentNode.clientWidth - 12;
+    return Math.floor((avail - 2 * (cols - 1)) / cols);
+  }
+
+  function fit() {
+    gridEl.style.setProperty("--cell", Math.max(14, Math.min(30, cellFor(L.cols))) + "px");
+  }
+
   function start() {
-    L = LEVELS[levelEl.value];
+    var base = LEVELS[levelEl.value];
+    L = { rows: base.rows, cols: base.cols, mines: base.mines };
+    if (L.cols > L.rows && cellFor(L.cols) < 24) L = { rows: base.cols, cols: base.rows, mines: base.mines };
     saved.level = levelEl.value;
     store();
     clearInterval(timer);
@@ -52,6 +63,7 @@
     buttons = [];
     gridEl.innerHTML = "";
     gridEl.style.gridTemplateColumns = "repeat(" + L.cols + ", auto)";
+    fit();
     for (var i = 0; i < L.rows * L.cols; i++) {
       cells.push({ mine: false, n: 0, open: false, flag: false });
       var b = document.createElement("button");
@@ -197,6 +209,7 @@
     flagEl.classList.toggle("toggle-on", flagMode);
   });
 
+  window.addEventListener("resize", fit);
   levelEl.addEventListener("change", start);
   document.getElementById("m-new").addEventListener("click", start);
   start();
