@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plaka ve Posta Kodu — Emre Kartın</title>
+  <meta name="description" content="81 ilin plaka kodu ve posta kodu başı. İl adı, plaka veya posta kodu yaz, ili bul." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=23" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Plaka ve Posta Kodu</h1>
+
+    <div class="field">
+      <label for="il-q">İl, plaka veya posta kodu</label>
+      <input id="il-q" type="search" autocomplete="off" spellcheck="false" placeholder="Ankara, 35, 34 ABC 123 veya 06500" />
+    </div>
+    <p id="il-out" class="status" aria-live="polite"></p>
+
+    <ul id="il-list" class="il-list"></ul>
+
+    <p class="status il-note">Posta kodunun ilk iki hanesi ilin plaka kodudur. Son üç hane ilçe ve mahalleye göre değişir; tam kod için <a href="https://www.ptt.gov.tr/posta-kodu" rel="noopener">PTT posta kodu sorgusu</a>.</p>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js?v=1"></script>
+<script src="/site.js?v=8"></script>
+</body>
+</html>

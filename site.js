@@ -32,6 +32,7 @@
     ["Parola", "/araclar/parola/", "Güçlü parola üret", "parola sifre password"],
     ["TC No", "/araclar/tc/", "Kontrol basamaklı no üret", "tc kimlik"],
     ["IBAN", "/araclar/iban/", "IBAN denetle", "iban banka"],
+    ["Plaka ve Posta Kodu", "/araclar/il/", "İl, plaka, posta kodu başı", "plaka posta kodu il sehir il kodu ptt"],
     ["SHA-256 Hash", "/araclar/hash/", "Metnin SHA-256 değeri", "sha sha256 hash"],
     ["Password Hash", "/araclar/bcrypt/", "bcrypt üret, denetle", "bcrypt password hash parola"],
     ["Döviz", "/araclar/doviz/", "Anlık kurla çevir", "doviz kur dolar euro"],

@@ -1311,6 +1311,45 @@ input[type="range"] {
 .re-examples span { color: var(--muted); font-family: var(--ui); font-size: 0.9rem; }
 .re-examples button { padding: 0.4rem 0.75rem; }
 
+.il-list {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 560px) {
+  .il-list { grid-template-columns: 1fr 1fr; }
+}
+
+.il-list li {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr auto;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+}
+
+.il-code {
+  font-family: Consolas, "Cascadia Mono", ui-monospace, monospace;
+  font-weight: 600;
+  color: var(--rust);
+}
+
+.il-list strong { font-weight: 600; }
+
+.il-post {
+  color: var(--muted);
+  font-family: Consolas, "Cascadia Mono", ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+
+.il-note { margin-top: 1.2rem; font-size: 0.88rem; }
+
 .actions label {
   display: inline-flex;
   align-items: center;
