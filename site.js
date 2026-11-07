@@ -6,6 +6,8 @@
     ["Rastgele Sayı", "/araclar/sayi/", "Aralıktan sayı çek", "random sayi kura"],
     ["Listeden Seç", "/araclar/sec/", "Satırlardan rastgele seç", "sec liste kura cekilis"],
     ["Kadro", "/araclar/kadro/", "Halı saha takımı kur", "halisaha hali saha kadro takim kaptan mac futbol"],
+    ["İlk 11", "/araclar/ilk11/", "Futbol on birini sahaya diz", "ilk 11 onbir kadro dizilis takim futbol forma"],
+    ["İlk 5", "/araclar/ilk5/", "Basketbol beşini sahaya diz", "ilk 5 bes basketbol basket kadro takim forma pota"],
     ["JSON", "/araclar/json/", "Hizala, sıkıştır, hatayı bul", "json format"],
     ["Base64", "/araclar/base64/", "Kodla veya çöz", "base64"],
     ["URL", "/araclar/url/", "Adresi kodla veya çöz", "url encode decode"],

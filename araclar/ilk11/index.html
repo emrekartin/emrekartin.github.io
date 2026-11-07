@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>İlk 11 — Emre Kartın</title>
+  <meta name="description" content="Sevdiğin takımın ilk 11'ini kur. Dizilişi seç, oyuncuları yaz, sahada gör, resim indir veya bağlantıyla paylaş." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=19" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">İlk 11</h1>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="xi-name">Takım</label>
+        <input id="xi-name" type="text" placeholder="Takım adı" autocomplete="off" maxlength="40" />
+      </div>
+      <div class="field">
+        <label for="xi-coach">Teknik direktör</label>
+        <input id="xi-coach" type="text" placeholder="İsteğe bağlı" autocomplete="off" maxlength="40" />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="xi-form">Diziliş</label>
+        <select id="xi-form"></select>
+      </div>
+      <div class="field">
+        <label for="xi-pattern">Forma deseni</label>
+        <select id="xi-pattern">
+          <option value="plain">Düz</option>
+          <option value="vstripe" selected>Dikey çizgili</option>
+          <option value="hstripe">Yatay çizgili</option>
+          <option value="half">İkiye bölünmüş</option>
+          <option value="sash">Çapraz şerit</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-3">
+      <div class="field">
+        <label for="xi-color">Birinci renk</label>
+        <input id="xi-color" type="color" value="#c8102e" />
+      </div>
+      <div class="field">
+        <label for="xi-color2">İkinci renk</label>
+        <input id="xi-color2" type="color" value="#ffffff" />
+      </div>
+      <div class="field">
+        <label for="xi-gk">Kaleci forması</label>
+        <input id="xi-gk" type="color" value="#facc15" />
+      </div>
+    </div>
+
+    <div id="xi-pitch" class="field-pitch xi-pitch">
+      <svg class="field-lines" viewBox="0 0 100 140" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="3" y="3" width="94" height="134" />
+        <line x1="3" y1="70" x2="97" y2="70" />
+        <circle cx="50" cy="70" r="9" />
+        <rect x="20" y="3" width="60" height="20" />
+        <rect x="36" y="3" width="28" height="7" />
+        <rect x="20" y="117" width="60" height="20" />
+        <rect x="36" y="130" width="28" height="7" />
+        <rect x="43" y="0.6" width="14" height="2.4" />
+        <rect x="43" y="137" width="14" height="2.4" />
+      </svg>
+    </div>
+    <p class="status">Oyuncuya dokunursan ismini yazacağın kutuya gidersin. Sürükleyip yerini değiştirebilirsin.</p>
+
+    <div class="actions">
+      <button type="button" id="xi-png" class="ghost">Resim indir</button>
+      <button type="button" id="xi-link" class="ghost">Bağlantıyı kopyala</button>
+      <button type="button" id="xi-reset" class="ghost">Dizilişe göre diz</button>
+      <button type="button" id="xi-clear" class="ghost">Temizle</button>
+    </div>
+    <p id="xi-out" class="status" aria-live="polite"></p>
+
+    <h2 class="pitch-title">Oyuncular</h2>
+    <div id="xi-slots" class="xi-slots"></div>
+
+    <div class="field">
+      <label for="xi-bench">Yedekler</label>
+      <textarea id="xi-bench" placeholder="Her satıra bir oyuncu" spellcheck="false"></textarea>
+    </div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="/araclar/dizilis.js"></script>
+  <script src="./app.js"></script>
+<script src="/site.js?v=4"></script>
+</body>
+</html>

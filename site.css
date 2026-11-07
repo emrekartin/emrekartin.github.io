@@ -1113,6 +1113,55 @@ button.ghost:hover:not(:disabled) { background: var(--paper-2); border-color: va
   .tok .nm { max-width: 4rem; font-size: 0.6rem; }
 }
 
+.xi-pitch {
+  max-width: 30rem;
+  margin: 1rem auto 0;
+  aspect-ratio: 5 / 7;
+  background: repeating-linear-gradient(180deg, #23874a 0 7.143%, #1f7a3f 7.143% 14.286%);
+}
+
+.xi-court {
+  max-width: 34rem;
+  margin: 1rem auto 0;
+  aspect-ratio: 100 / 94;
+  background: repeating-linear-gradient(90deg, #dba567 0 5%, #d39a5e 5% 10%);
+}
+
+.xi-court .field-lines .paint { fill: rgba(120, 50, 20, 0.35); stroke: none; }
+.xi-court .field-lines .rim { stroke: #f97316; }
+
+input[type="color"]:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.xi-pitch .tok .dot,
+.xi-court .tok .dot { border-color: #fff; }
+.field-pitch .tok .dot.dim { font-size: 0.6rem; }
+
+.xi-slots {
+  display: grid;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 560px) {
+  .xi-slots { grid-template-columns: 1fr 1fr; }
+}
+
+.xi-slot {
+  display: grid;
+  grid-template-columns: 2.6rem 3.4rem 1fr;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.xi-pos {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.xi-slot input { min-width: 0; text-align: left; }
+.xi-slot input:nth-child(2) { text-align: center; }
+
 .actions label {
   display: inline-flex;
   align-items: center;
