@@ -41,12 +41,8 @@
       code.textContent = p.code;
       var name = document.createElement("strong");
       name.textContent = p.name;
-      var post = document.createElement("span");
-      post.className = "il-post";
-      post.textContent = "Posta " + p.code + "xxx";
       li.appendChild(code);
       li.appendChild(name);
-      li.appendChild(post);
       listEl.appendChild(li);
     });
   }
@@ -73,22 +69,9 @@
     }
 
     if (/^\d+$/.test(compact)) {
-      if (compact.length <= 2) {
-        var one = byCode(Number(compact));
-        outEl.textContent = one ? one.name + " · plaka " + one.code + " · posta kodu " + one.code + "xxx" : "Plaka kodu 01–81 arasında olmalı.";
-        render(one ? [one] : []);
-        return;
-      }
-      var head = byCode(Number(compact.slice(0, 2)));
-      if (!head) {
-        outEl.textContent = "Bu posta kodu bir ile ait değil. İlk iki hane 01–81 olmalı.";
-        render([]);
-        return;
-      }
-      outEl.textContent = compact.length === 5
-        ? "Posta kodu " + compact + " · " + head.name + " (plaka " + head.code + ")"
-        : "Posta kodu 5 hanedir. " + compact.slice(0, 2) + " ile başlayanlar " + head.name + ".";
-      render([head]);
+      var one = compact.length <= 2 ? byCode(Number(compact)) : null;
+      outEl.textContent = one ? one.name + " · plaka " + one.code : "Plaka kodu 01–81 arasında olmalı.";
+      render(one ? [one] : []);
       return;
     }
 
@@ -100,7 +83,7 @@
       hits = PROVINCES.filter(function (p) { return p.key.indexOf(q) >= 0; });
     }
     if (hits.length === 1) {
-      outEl.textContent = hits[0].name + " · plaka " + hits[0].code + " · posta kodu " + hits[0].code + "xxx";
+      outEl.textContent = hits[0].name + " · plaka " + hits[0].code;
     } else {
       outEl.textContent = hits.length ? "" : "İl bulunamadı.";
     }
