@@ -677,15 +677,68 @@ button.ghost:hover:not(:disabled) { background: var(--paper-2); color: var(--ink
 .tr-pop button.on { background: var(--ink); color: #fff; }
 .tr-pop button:disabled { opacity: 0.28; }
 
-.tr-cal, .tr-hours, .tr-mins {
+.tr-cal {
   display: grid;
+  grid-template-columns: repeat(7, 1fr);
   gap: 0.15rem;
   text-align: center;
 }
 
-.tr-cal { grid-template-columns: repeat(7, 1fr); }
-.tr-hours { grid-template-columns: repeat(6, 1fr); }
-.tr-mins { grid-template-columns: repeat(6, 1fr); margin-top: 0.35rem; }
+.tr-clock { width: min(16rem, 100%); }
+
+.tr-read {
+  display: block;
+  margin-bottom: 0.45rem;
+  text-align: center;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+}
+
+.tr-cols {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.35rem;
+  align-items: start;
+}
+
+.tr-col span,
+.tr-sep {
+  font-family: var(--ui);
+}
+
+.tr-col span {
+  display: block;
+  margin-bottom: 0.25rem;
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.tr-sep {
+  padding-top: 1.55rem;
+  font-weight: 600;
+}
+
+.tr-list {
+  height: 11.5rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  scrollbar-width: thin;
+}
+
+.tr-pop button.tr-ok {
+  width: 100%;
+  margin-top: 0.55rem;
+  padding: 0.55rem 0.8rem;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+}
+
+.tr-pop button.tr-ok:hover { background: var(--ink); color: #fff; }
 
 .tr-cal .dow {
   font-family: var(--ui);

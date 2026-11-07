@@ -135,43 +135,73 @@
   }
 
   function openTime(input) {
-    var current = parseTime(input.value) || { h: 9, m: 0 };
+    var current = parseTime(input.value) || { h: 9, m: 0, s: 0 };
+    var chosen = { h: current.h, m: current.m, s: current.s || 0 };
     var node = document.createElement("div");
-    node.className = "tr-pop";
-    var hours = document.createElement("div");
-    hours.className = "tr-hours";
-    for (var h = 0; h < 24; h++) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.textContent = pad(h);
-      if (h === current.h) btn.className = "on";
-      btn.addEventListener("click", function (event) {
-        event.stopPropagation();
-        var hour = Number(event.currentTarget.textContent);
-        var keep = parseTime(input.value);
-        input.value = formatTime(hour, keep ? keep.m : 0, keep ? keep.s : 0);
-        close();
-      });
-      hours.appendChild(btn);
+    node.className = "tr-pop tr-clock";
+    var read = document.createElement("strong");
+    read.className = "tr-read";
+
+    function showRead() {
+      read.textContent = pad(chosen.h) + ":" + pad(chosen.m);
+      input.value = formatTime(chosen.h, chosen.m, chosen.s);
     }
-    var mins = document.createElement("div");
-    mins.className = "tr-mins";
-    for (var m = 0; m < 60; m += 5) {
-      var minute = document.createElement("button");
-      minute.type = "button";
-      minute.textContent = pad(m);
-      if (m === current.m) minute.className = "on";
-      minute.addEventListener("click", function (event) {
-        event.stopPropagation();
-        var keep = parseTime(input.value) || current;
-        input.value = formatTime(keep.h, Number(event.currentTarget.textContent), keep.s);
-        close();
-      });
-      mins.appendChild(minute);
+
+    function column(title, count, get, set) {
+      var wrap = document.createElement("div");
+      wrap.className = "tr-col";
+      var cap = document.createElement("span");
+      cap.textContent = title;
+      var list = document.createElement("div");
+      list.className = "tr-list";
+      for (var n = 0; n < count; n++) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = pad(n);
+        if (n === get()) btn.className = "on";
+        btn.addEventListener("click", function (event) {
+          event.stopPropagation();
+          set(Number(event.currentTarget.textContent));
+          [].forEach.call(list.children, function (child) {
+            child.className = Number(child.textContent) === get() ? "on" : "";
+          });
+          showRead();
+        });
+        list.appendChild(btn);
+      }
+      wrap.appendChild(cap);
+      wrap.appendChild(list);
+      return list;
     }
-    node.appendChild(hours);
-    node.appendChild(mins);
+
+    showRead();
+    var cols = document.createElement("div");
+    cols.className = "tr-cols";
+    var hourList = column("Saat", 24, function () { return chosen.h; }, function (v) { chosen.h = v; });
+    var sep = document.createElement("span");
+    sep.className = "tr-sep";
+    sep.textContent = ":";
+    var minuteList = column("Dakika", 60, function () { return chosen.m; }, function (v) { chosen.m = v; });
+    cols.appendChild(hourList.parentNode);
+    cols.appendChild(sep);
+    cols.appendChild(minuteList.parentNode);
+    var ok = document.createElement("button");
+    ok.type = "button";
+    ok.className = "tr-ok";
+    ok.textContent = "Tamam";
+    ok.addEventListener("click", function (event) {
+      event.stopPropagation();
+      showRead();
+      close();
+    });
+    node.appendChild(read);
+    node.appendChild(cols);
+    node.appendChild(ok);
     place(input, node);
+    [hourList, minuteList].forEach(function (list) {
+      var on = list.querySelector(".on");
+      if (on) list.scrollTop = on.offsetTop - (list.clientHeight - on.offsetHeight) / 2;
+    });
   }
 
   document.addEventListener("click", function (event) {
