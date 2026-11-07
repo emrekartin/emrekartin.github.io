@@ -2,6 +2,7 @@
   var dateEl = document.getElementById("tcmb-date");
   var usdEl = document.getElementById("tcmb-usd");
   var eurEl = document.getElementById("tcmb-eur");
+  var goldEl = document.getElementById("gold-line");
   var errorEl = document.getElementById("tcmb-error");
   var runBtn = document.getElementById("tcmb-run");
   var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
@@ -36,25 +37,50 @@
     eurEl.textContent = line("Euro", rows.EUR);
   }
 
+  function tl(n) {
+    return Number(n).toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function showGold(data) {
+    var link = data.attribution;
+    var rows = (data.market && data.market.gold_silver) || [];
+    var gram = null;
+    rows.forEach(function (row) {
+      if (row.code === "XAU_GRAM") gram = row;
+    });
+    if (!gram || !link || !link.url) throw new Error("empty");
+    goldEl.textContent = "";
+    goldEl.appendChild(document.createTextNode("Gram altın · Alış " + tl(gram.buy) + " · Satış " + tl(gram.sell) + " · "));
+    var anchor = document.createElement("a");
+    anchor.href = link.url;
+    anchor.textContent = link.text || "TurkishLiraRates";
+    goldEl.appendChild(anchor);
+  }
+
+  function load(url) {
+    return fetch(url).then(function (response) {
+      if (!response.ok) throw new Error("bad");
+      return response.json();
+    });
+  }
+
   function run() {
     errorEl.textContent = "";
     runBtn.disabled = true;
     dateEl.textContent = "Bülten alınıyor.";
-    fetch("https://tradersbot.app/api/v1/tcmb")
-      .then(function (response) {
-        if (!response.ok) throw new Error("bad");
-        return response.json();
-      })
-      .then(show)
-      .catch(function () {
-        dateEl.textContent = "";
-        usdEl.textContent = "";
-        eurEl.textContent = "";
-        errorEl.textContent = "Bülten alınamadı.";
-      })
-      .then(function () {
-        runBtn.disabled = false;
-      });
+    goldEl.textContent = "";
+    var bulletin = load("https://tradersbot.app/api/v1/tcmb").then(show).catch(function () {
+      dateEl.textContent = "";
+      usdEl.textContent = "";
+      eurEl.textContent = "";
+      errorEl.textContent = "Bülten alınamadı.";
+    });
+    var gold = load("https://turkishlirarates.com/data/v1/rates.json").then(showGold).catch(function () {
+      goldEl.textContent = "Gram altın alınamadı.";
+    });
+    Promise.all([bulletin, gold]).then(function () {
+      runBtn.disabled = false;
+    });
   }
 
   document.getElementById("tcmb-run").addEventListener("click", run);
