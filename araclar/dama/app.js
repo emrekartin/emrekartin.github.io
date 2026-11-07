@@ -151,6 +151,7 @@
 
   // ---- oyun ----
   var state, history, selected = -1, targets = [], lastMove = null, over = false, thinking = false;
+  var preSel = -1, preTargets = [], premove = null, drag = null, suppressClick = false;
   var mode = "ai", mySide = "w", online = null;
 
   function sfx(name) {
@@ -173,6 +174,7 @@
     history = [];
     selected = -1;
     targets = [];
+    clearPremove();
     lastMove = null;
     over = false;
     thinking = false;
@@ -200,9 +202,11 @@
       btn.setAttribute("aria-label", "abcdefgh"[c] + (8 - r) + (p ? (side(p) === "w" ? " beyaz" : " siyah") + (isKing(p) ? " dama" : " taş") : ""));
       if (lastMove && (sq === lastMove.from || sq === lastMove.to)) btn.classList.add("last");
       if (lastMove && lastMove.caps.indexOf(sq) >= 0) btn.classList.add("gone");
-      if (sq === selected) btn.classList.add("sel");
+      if (sq === selected || sq === preSel) btn.classList.add("sel");
       if (myTurn() && mustTake.indexOf(sq) >= 0 && sq !== selected) btn.classList.add("must");
-      if (targets.some(function (m) { return m.to === sq; })) btn.classList.add("dot");
+      if (targets.some(function (m) { return m.to === sq; }) || preTargets.indexOf(sq) >= 0) btn.classList.add("dot");
+      if (premove && (sq === premove.from || sq === premove.to)) btn.classList.add("pre");
+      if (drag && drag.moved && sq === drag.from) btn.classList.add("lifted");
       boardEl.appendChild(btn);
     }
     undoEl.disabled = mode === "online" || !history.length || thinking;
@@ -244,6 +248,7 @@
   }
 
   function play(m, remote) {
+    var mover = state.turn;
     history.push({ state: state, last: lastMove });
     var wasKing = isKing(state.b[m.from]);
     state = make(state, m);
@@ -253,25 +258,63 @@
     if (mode === "online" && !remote) online.send({ t: "move", from: m.from, to: m.to, caps: m.caps });
     sfx(!wasKing && isKing(state.b[m.to]) ? "match" : m.caps.length ? "kick" : "flip");
     render();
+    if (mover !== mySide) runPremove();
     maybeAi();
   }
 
-  function maybeAi() {
-    if (mode !== "ai" || over || state.turn === mySide) return;
-    thinking = true;
-    render();
-    setTimeout(function () {
-      var m = bestMove(state, Number(levelEl.value));
-      thinking = false;
-      if (m) play(m);
-      else render();
-    }, 250);
+  function clearPremove() {
+    preSel = -1;
+    preTargets = [];
+    premove = null;
   }
 
-  boardEl.addEventListener("click", function (e) {
-    var btn = e.target.closest("button");
-    if (!btn || !myTurn()) return;
-    var sq = Number(btn.dataset.sq);
+  function premoveTargets(sq) {
+    var p = state.b[sq], out = [];
+    var r = sq >> 3, c = sq & 7;
+    var dirs = isKing(p) ? DIRS : manDirs(mySide);
+    dirs.forEach(function (d) {
+      var rr = r + d[0], cc = c + d[1];
+      while (on(rr, cc)) {
+        out.push(rr * 8 + cc);
+        if (!isKing(p)) {
+          if (on(rr + d[0], cc + d[1])) out.push((rr + d[0]) * 8 + cc + d[1]);
+          break;
+        }
+        rr += d[0]; cc += d[1];
+      }
+    });
+    var caps = [];
+    captures(state.b, sq, p, null, caps, [sq], []);
+    caps.forEach(function (m) { out.push(m.to); });
+    return out.filter(function (to, i) { return out.indexOf(to) === i; });
+  }
+
+  function runPremove() {
+    if (mode === "local" || state.turn !== mySide) return;
+    if (!premove || over) {
+      if (preSel >= 0 || premove) { clearPremove(); render(); }
+      return;
+    }
+    var pm = premove;
+    clearPremove();
+    var m = legal(state).filter(function (x) { return x.from === pm.from && x.to === pm.to; })[0];
+    if (!m) return render();
+    setTimeout(function () {
+      if (!over && state.turn === mySide) play(m);
+    }, 150);
+  }
+
+  function controlled() {
+    if (over) return "";
+    if (mode === "local") return thinking ? "" : state.turn;
+    if (mode === "online" && !(online && online.connected())) return "";
+    return mySide;
+  }
+
+  function tap(sq) {
+    var who = controlled();
+    if (!who) return;
+    if (who !== state.turn || thinking) return tapPremove(sq);
     var hit = targets.filter(function (m) { return m.to === sq; })[0];
     if (hit) return play(hit);
     var p = state.b[sq];
@@ -293,7 +336,99 @@
       targets = [];
     }
     render();
+  }
+
+  function tapPremove(sq) {
+    if (preSel >= 0 && preTargets.indexOf(sq) >= 0) {
+      premove = { from: preSel, to: sq };
+      preSel = -1;
+      preTargets = [];
+      return render();
+    }
+    var p = state.b[sq];
+    premove = null;
+    if (side(p) === mySide && sq !== preSel) {
+      preSel = sq;
+      preTargets = premoveTargets(sq);
+    } else {
+      preSel = -1;
+      preTargets = [];
+    }
+    render();
+  }
+
+  function maybeAi() {
+    if (mode !== "ai" || over || state.turn === mySide) return;
+    thinking = true;
+    render();
+    setTimeout(function () {
+      var m = bestMove(state, Number(levelEl.value));
+      thinking = false;
+      if (m) play(m);
+      else render();
+    }, 250);
+  }
+
+  boardEl.addEventListener("click", function (e) {
+    if (suppressClick) return;
+    var btn = e.target.closest("button");
+    if (btn) tap(Number(btn.dataset.sq));
   });
+
+  boardEl.addEventListener("contextmenu", function (e) {
+    if (!premove && preSel < 0) return;
+    e.preventDefault();
+    clearPremove();
+    render();
+  });
+
+  boardEl.addEventListener("pointerdown", function (e) {
+    var btn = e.target.closest("button");
+    if (!btn || e.button > 0) return;
+    var sq = Number(btn.dataset.sq), who = controlled();
+    if (!who || side(state.b[sq]) !== who) return;
+    drag = { from: sq, x: e.clientX, y: e.clientY, moved: false, ghost: null };
+  });
+
+  document.addEventListener("pointermove", function (e) {
+    if (!drag) return;
+    if (!drag.moved) {
+      if (Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y) < 6) return;
+      drag.moved = true;
+      var from = drag.from;
+      var mine = controlled() === state.turn && !thinking;
+      if (mine ? selected !== from : preSel !== from) tap(from);
+      if (mine && selected !== from) { drag = null; return; }
+      var cell = boardEl.querySelector('[data-sq="' + from + '"]');
+      var ghost = document.createElement("span");
+      ghost.className = "drag-ghost";
+      ghost.appendChild(cell.querySelector(".disc").cloneNode(true));
+      ghost.style.width = ghost.style.height = cell.offsetWidth + "px";
+      document.body.appendChild(ghost);
+      drag.ghost = ghost;
+      render();
+    }
+    e.preventDefault();
+    drag.ghost.style.transform = "translate(" + (e.clientX - drag.ghost.offsetWidth / 2) + "px," + (e.clientY - drag.ghost.offsetHeight / 2) + "px)";
+  });
+
+  function endDrag(e) {
+    if (!drag) return;
+    var d = drag;
+    drag = null;
+    if (!d.moved) return;
+    d.ghost.remove();
+    suppressClick = true;
+    setTimeout(function () { suppressClick = false; }, 0);
+    var el = e && document.elementFromPoint(e.clientX, e.clientY);
+    var btn = el && el.closest("#d-board button");
+    var to = btn ? Number(btn.dataset.sq) : -1;
+    if (to >= 0 && to !== d.from) tap(to);
+    else render();
+  }
+
+  document.addEventListener("pointerup", endDrag);
+  document.addEventListener("pointercancel", function () { endDrag(null); });
 
   undoEl.addEventListener("click", function () {
     if (mode === "online" || !history.length || thinking) return;
@@ -306,6 +441,7 @@
     over = false;
     selected = -1;
     targets = [];
+    clearPremove();
     render();
     maybeAi();
   });

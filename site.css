@@ -1953,3 +1953,8 @@ button.toggle-on, button.toggle-on:hover { background: var(--ink); color: var(--
 .disc::before { content: ""; position: absolute; inset: 18%; border-radius: 50%; border: 2px solid rgba(0, 0, 0, 0.12); }
 .disc.db::before { border-color: rgba(255, 255, 255, 0.12); }
 .disc.king::after { content: "♛"; position: absolute; inset: 0; display: grid; place-items: center; font-family: "Segoe UI Symbol", "DejaVu Sans", serif; font-size: min(5.5vw, 1.7rem); color: #d97706; }.game-bar [hidden] { display: none !important; }
+.board { touch-action: none; }
+.board .pre { background-image: linear-gradient(rgba(220, 38, 38, 0.38), rgba(220, 38, 38, 0.38)) !important; }
+.board .lifted > * { opacity: 0.25; }
+.drag-ghost { position: fixed; top: 0; left: 0; z-index: 1000; display: grid; place-items: center; pointer-events: none; font-family: "Segoe UI Symbol", "DejaVu Sans", "Noto Sans Symbols 2", serif; line-height: 1; }
+.drag-ghost .disc { width: 74%; height: 74%; }
