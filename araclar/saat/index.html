@@ -8,7 +8,7 @@
   <meta name="description" content="İki saat arası saat ve dakika." />
   <meta name="theme-color" content="#d5dce6" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/site.css?v=10" />
+  <link rel="stylesheet" href="/site.css?v=11" />
 </head>
 <body>
   <div class="wrap">
@@ -28,11 +28,11 @@
     <div class="row-2">
       <div class="field">
         <label for="time-from">Başlangıç</label>
-        <input id="time-from" type="time" />
+        <input id="time-from" class="tr-time" type="text" inputmode="numeric" placeholder="09:15" autocomplete="off" />
       </div>
       <div class="field">
         <label for="time-to">Bitiş</label>
-        <input id="time-to" type="time" />
+        <input id="time-to" class="tr-time" type="text" inputmode="numeric" placeholder="17:45" autocomplete="off" />
       </div>
     </div>
     <p id="time-out" class="status" aria-live="polite"></p>
@@ -45,6 +45,7 @@
       <a href="/araclar/">← Kullanılabilir araçlar</a>
     </footer>
   </div>
+  <script src="/araclar/tr-sec.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

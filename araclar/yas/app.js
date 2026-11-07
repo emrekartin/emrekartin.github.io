@@ -6,15 +6,25 @@
 
   function today() {
     var d = new Date();
-    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    return String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + d.getFullYear();
   }
 
   function parse(value) {
-    var parts = value.split("-");
-    if (parts.length !== 3) return null;
-    var y = Number(parts[0]);
-    var m = Number(parts[1]);
-    var d = Number(parts[2]);
+    var text = String(value || "").trim();
+    var tr = text.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+    var iso = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    var y;
+    var m;
+    var d;
+    if (tr) {
+      d = Number(tr[1]);
+      m = Number(tr[2]);
+      y = Number(tr[3]);
+    } else if (iso) {
+      y = Number(iso[1]);
+      m = Number(iso[2]);
+      d = Number(iso[3]);
+    } else return null;
     var date = new Date(y, m - 1, d);
     if (date.getFullYear() !== y || date.getMonth() !== m - 1 || date.getDate() !== d) return null;
     return date;

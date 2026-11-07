@@ -8,7 +8,7 @@
   <meta name="description" content="İki tarih arası yıl, ay ve gün." />
   <meta name="theme-color" content="#d5dce6" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/site.css?v=10" />
+  <link rel="stylesheet" href="/site.css?v=11" />
 </head>
 <body>
   <div class="wrap">
@@ -28,11 +28,11 @@
     <div class="row-2">
       <div class="field">
         <label for="date-from">Başlangıç</label>
-        <input id="date-from" type="date" />
+        <input id="date-from" class="tr-date" type="text" inputmode="numeric" placeholder="07.11.2026" autocomplete="off" />
       </div>
       <div class="field">
         <label for="date-to">Bitiş</label>
-        <input id="date-to" type="date" />
+        <input id="date-to" class="tr-date" type="text" inputmode="numeric" placeholder="07.11.2026" autocomplete="off" />
       </div>
     </div>
     <p id="date-out" class="status" aria-live="polite"></p>
@@ -45,6 +45,7 @@
       <a href="/araclar/">← Kullanılabilir araçlar</a>
     </footer>
   </div>
+  <script src="/araclar/tr-sec.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

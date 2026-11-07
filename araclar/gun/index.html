@@ -8,7 +8,7 @@
   <meta name="description" content="Bir tarihe gün, ay veya yıl ekler." />
   <meta name="theme-color" content="#d5dce6" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/site.css?v=10" />
+  <link rel="stylesheet" href="/site.css?v=11" />
 </head>
 <body>
   <div class="wrap">
@@ -28,7 +28,7 @@
     <div class="row-3">
       <div class="field">
         <label for="off-date">Tarih</label>
-        <input id="off-date" type="date" />
+        <input id="off-date" class="tr-date" type="text" inputmode="numeric" placeholder="07.11.2026" autocomplete="off" />
       </div>
       <div class="field">
         <label for="off-amount">Sayı</label>
@@ -53,6 +53,7 @@
       <a href="/araclar/">← Kullanılabilir araçlar</a>
     </footer>
   </div>
+  <script src="/araclar/tr-sec.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>
