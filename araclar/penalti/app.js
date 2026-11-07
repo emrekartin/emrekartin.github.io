@@ -21,6 +21,10 @@
 
   var you, cpu, turn, busy, over;
 
+  function sfx(name) {
+    if (window.ekSes) window.ekSes(name);
+  }
+
   function store() {
     try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
   }
@@ -141,8 +145,10 @@
     }
     placeKeeper(dive);
     placeBall(bx, by, true);
+    sfx("kick");
     setTimeout(function () {
       var scored = !miss && !saved1;
+      sfx(miss ? "post" : saved1 ? "save" : "goal");
       (shooting ? you : cpu).push(scored);
       var text = miss ? (by === 6 ? "Üstten auta!" : "Direğin yanından auta!") : saved1 ? "Kaleci kurtardı!" : "Gol!";
       msgEl.textContent = (shooting ? "Sen: " : "Rakip: ") + text;
@@ -151,6 +157,7 @@
         var won = goals(you) > goals(cpu);
         saved.p++;
         if (won) saved.w++;
+        setTimeout(function () { sfx(won ? "win" : "lose"); }, 500);
         msgEl.textContent += " · " + (won ? "Seriyi kazandın " : "Seriyi kaybettin ") + goals(you) + "-" + goals(cpu) + ".";
       }
       store();

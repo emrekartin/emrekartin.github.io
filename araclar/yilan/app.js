@@ -20,6 +20,10 @@
 
   var snake, dir, queue, food, score, timer = 0, state = "idle";
 
+  function sfx(name) {
+    if (window.ekSes) window.ekSes(name);
+  }
+
   function store() {
     saved.best = best;
     saved.speed = speedEl.value;
@@ -78,6 +82,7 @@
       bestEl.textContent = best;
     }
     store();
+    sfx(record && score ? "win" : "lose");
     overEl.textContent = (record && score ? "Yeni rekor: " : "Skor: ") + score + " · tekrar için dokun";
     overEl.hidden = false;
   }
@@ -104,6 +109,7 @@
     if (eat) {
       score++;
       scoreEl.textContent = score;
+      sfx("eat");
       if (snake.length === N * N) { draw(); return end(); }
       placeFood();
     } else {

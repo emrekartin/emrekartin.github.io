@@ -13,6 +13,10 @@
 
   var state = "idle", times = [], timer = 0, shownAt = 0;
 
+  function sfx(name) {
+    if (window.ekSes) window.ekSes(name);
+  }
+
   function show(cls, title, note) {
     pad.className = "rx" + (cls ? " " + cls : "");
     pad.textContent = title;
@@ -26,6 +30,7 @@
   function arm() {
     state = "wait";
     show("wait", "Bekle…", "Yeşil yanınca bas");
+    sfx("wait");
     timer = setTimeout(function () {
       state = "go";
       show("go", "BAS!");
@@ -47,6 +52,7 @@
       clearTimeout(timer);
       state = "result";
       show("", "Erken bastın!", "Bu deneme sayılmadı. Tekrar için dokun.");
+      sfx("early");
       return;
     }
     if (state === "go") {
@@ -56,6 +62,7 @@
       countEl.textContent = times.length + " / " + ROUNDS;
       listEl.textContent = times.map(function (t) { return t + " ms"; }).join(" · ");
       if (times.length < ROUNDS) {
+        sfx("tap");
         state = "result";
         show("", ms + " ms", "Sıradaki için dokun");
         return;
@@ -68,6 +75,7 @@
         bestEl.textContent = best + " ms";
         try { localStorage.setItem(KEY, JSON.stringify({ best: best })); } catch (e) {}
       }
+      sfx(record ? "win" : "match");
       show("", "Ortalama " + avg + " ms", (record ? "Yeni rekor! " : "") + "Yeniden denemek için dokun");
     }
   }

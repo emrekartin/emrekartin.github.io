@@ -19,6 +19,10 @@
   if (LEVELS[saved.level]) levelEl.value = saved.level;
   saved.best = saved.best || {};
 
+  function sfx(name) {
+    if (window.ekSes) window.ekSes(name);
+  }
+
   function store() {
     try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
   }
@@ -126,6 +130,7 @@
     });
     buttons[i].classList.add("boom");
     msgEl.textContent = "Mayına bastın. Yeni oyun?";
+    sfx("boom");
   }
 
   function win() {
@@ -135,6 +140,7 @@
     timeEl.textContent = secs;
     cells.forEach(function (cell, j) { if (cell.mine && !cell.flag) { cell.flag = true; paint(j); } });
     leftEl.textContent = "0";
+    sfx("win");
     var best = saved.best[levelEl.value];
     if (!best || secs < best) {
       saved.best[levelEl.value] = secs;
@@ -153,6 +159,7 @@
     flags += cell.flag ? 1 : -1;
     leftEl.textContent = L.mines - flags;
     paint(i);
+    sfx(cell.flag ? "flag" : "unflag");
   }
 
   function chord(i) {
@@ -168,8 +175,13 @@
     var i = Number(b.dataset.i);
     if (flagMode && !cells[i].open) { toggleFlag(i); return; }
     if (!started) plant(i);
-    if (cells[i].open) { if (cells[i].n) chord(i); return; }
-    reveal(i);
+    var before = opened;
+    if (cells[i].open) {
+      if (cells[i].n) chord(i);
+    } else {
+      reveal(i);
+    }
+    if (!done && opened > before) sfx("open");
   });
 
   gridEl.addEventListener("contextmenu", function (e) {

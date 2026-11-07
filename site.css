@@ -1868,3 +1868,7 @@ button.toggle-on, button.toggle-on:hover { background: var(--ink); color: var(--
 .rx small { display: block; margin-top: 0.4rem; font-size: 0.95rem; font-weight: 500; opacity: 0.85; }
 .check-inline { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--ui); font-size: 0.9rem; }
 .check-inline:has(input:disabled) { opacity: 0.5; cursor: not-allowed; }
+.game-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.game-head .game-sound { flex: none; width: auto; display: inline-flex; align-items: center; justify-content: center; padding: 0.45rem; }
+.game-sound svg { width: 1.25rem; height: 1.25rem; }
+.game-sound[aria-pressed="false"] { color: var(--muted); }

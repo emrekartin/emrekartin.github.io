@@ -11,6 +11,10 @@
 
   for (var i = 0; i < N * N; i++) boardEl.appendChild(document.createElement("div"));
 
+  function sfx(name, arg) {
+    if (window.ekSes) window.ekSes(name, arg);
+  }
+
   function empty() {
     var g = [];
     for (var r = 0; r < N; r++) g.push([0, 0, 0, 0]);
@@ -118,17 +122,23 @@
     if (JSON.stringify(grid) === before) return;
     prev = snapshot;
     score += gained;
+    var top = 0;
+    merged.forEach(function (i) { top = Math.max(top, grid[Math.floor(i / N)][i % N]); });
     spawn();
+    var sound = top ? "merge" : "move";
     if (!won && grid.some(function (row) { return row.indexOf(2048) >= 0; })) {
       won = true;
+      sound = "win";
       msgEl.textContent = "2048! Kazandın. İstersen devam et.";
     } else {
       msgEl.textContent = "";
     }
     if (!canMove()) {
       over = true;
+      sound = "lose";
       msgEl.textContent = "Hamle kalmadı. Skor: " + score;
     }
+    sfx(sound, Math.log2(top || 2));
     draw();
     store();
   }

@@ -16,6 +16,10 @@
 
   var deck, open, moves, found, t0, timer, lock;
 
+  function sfx(name) {
+    if (window.ekSes) window.ekSes(name);
+  }
+
   function store() {
     try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
   }
@@ -65,6 +69,7 @@
 
   function finish() {
     clearInterval(timer);
+    sfx("win");
     var secs = Math.max(1, Math.round((Date.now() - t0) / 1000));
     timeEl.textContent = secs;
     var b = saved.best[levelEl.value];
@@ -88,7 +93,7 @@
     b.classList.add("up");
     b.setAttribute("aria-label", deck[b.dataset.i]);
     open.push(b);
-    if (open.length < 2) return;
+    if (open.length < 2) { sfx("flip"); return; }
     moves++;
     movesEl.textContent = moves;
     var a = open[0], c = open[1];
@@ -98,8 +103,11 @@
       c.classList.add("done");
       found += 2;
       if (found === deck.length) finish();
+      else sfx("match");
       return;
     }
+    sfx("flip");
+    setTimeout(function () { sfx("nomatch"); }, 450);
     lock = true;
     setTimeout(function () {
       a.classList.remove("up");
