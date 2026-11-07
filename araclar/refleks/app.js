@@ -6,6 +6,7 @@
   var lastEl = document.getElementById("r-last");
   var bestEl = document.getElementById("r-best");
   var listEl = document.getElementById("r-list");
+  var noteEl = document.getElementById("r-note");
 
   var best = 0;
   try { best = Number(JSON.parse(localStorage.getItem(KEY) || "{}").best) || 0; } catch (e) {}
@@ -15,6 +16,25 @@
 
   function sfx(name) {
     if (window.ekSes) window.ekSes(name);
+  }
+
+  var LEVELS = [
+    [180, "Olağanüstü. Profesyonel oyuncu ve sporcu seviyesi; bu kadar düşük değerde biraz şans da olabilir."],
+    [220, "Çok iyi. İnsanların büyük çoğunluğundan hızlısın."],
+    [260, "İyi. Ortalamanın üstünde bir tepki süresi."],
+    [310, "Ortalama. İnsanların çoğu 250–300 ms arasında çıkar."],
+    [400, "Ortalamanın biraz altında. Yorgunluk, dikkat ya da ekran/fare gecikmesi etkiliyor olabilir."],
+    [Infinity, "Yavaş. Dinlenip tekrar dene; telefonda ve kablosuz farede değerler daha yüksek çıkar."]
+  ];
+
+  function comment(avg) {
+    for (var i = 0; i < LEVELS.length; i++) if (avg < LEVELS[i][0]) return LEVELS[i][1];
+    return "";
+  }
+
+  function spread(list) {
+    var gap = Math.max.apply(null, list) - Math.min.apply(null, list);
+    return gap > 120 ? " Denemeler arasında " + gap + " ms fark var; dikkatin dalgalanmış olabilir." : " Denemelerin tutarlı.";
   }
 
   function show(cls, title, note) {
@@ -43,6 +63,7 @@
       if (state === "done") {
         times = [];
         listEl.textContent = "";
+        noteEl.textContent = "";
       }
       countEl.textContent = times.length + " / " + ROUNDS;
       arm();
@@ -77,6 +98,7 @@
       }
       sfx(record ? "win" : "match");
       show("", "Ortalama " + avg + " ms", (record ? "Yeni rekor! " : "") + "Yeniden denemek için dokun");
+      noteEl.textContent = comment(avg) + spread(times);
     }
   }
 
