@@ -12,7 +12,7 @@
   <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/site.css?v=15" />
+  <link rel="stylesheet" href="/site.css?v=17" />
 </head>
 <body>
   <div class="wrap">
@@ -82,6 +82,49 @@
     </section>
 
     <div id="squad-out" class="squad-teams"></div>
+
+    <section id="pitch-box" class="pitch-box" hidden>
+      <h2 class="pitch-title">Saha</h2>
+      <div class="row-2" id="pitch-sides" hidden>
+        <div class="field">
+          <label for="pitch-a">Sol</label>
+          <select id="pitch-a"></select>
+        </div>
+        <div class="field">
+          <label for="pitch-b">Sağ</label>
+          <select id="pitch-b"></select>
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label for="pitch-form-a" id="pitch-form-a-label">Diziliş</label>
+          <input id="pitch-form-a" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="field">
+          <label for="pitch-form-b" id="pitch-form-b-label">Diziliş</label>
+          <input id="pitch-form-b" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" />
+        </div>
+      </div>
+      <p class="error" id="pitch-error" role="alert"></p>
+      <div id="pitch" class="field-pitch">
+        <svg class="field-lines" viewBox="0 0 150 100" preserveAspectRatio="none" aria-hidden="true">
+          <rect x="3" y="3" width="144" height="94" />
+          <line x1="75" y1="3" x2="75" y2="97" />
+          <circle cx="75" cy="50" r="11" />
+          <rect x="3" y="25" width="20" height="50" />
+          <rect x="3" y="37" width="7" height="26" />
+          <rect x="127" y="25" width="20" height="50" />
+          <rect x="140" y="37" width="7" height="26" />
+          <rect x="0.6" y="43" width="2.4" height="14" />
+          <rect x="147" y="43" width="2.4" height="14" />
+        </svg>
+      </div>
+      <p class="status">Oyuncuyu sürükleyip istediğin yere koy. Diziliş değişince yerleşim baştan kurulur.</p>
+      <div class="actions">
+        <button type="button" id="pitch-reset" class="ghost">Dizilişe göre diz</button>
+        <button type="button" id="pitch-png" class="ghost">Resim indir</button>
+      </div>
+    </section>
 
     <footer class="site-footer">
       <a href="/araclar/">← Kullanılabilir araçlar</a>

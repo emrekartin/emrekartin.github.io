@@ -1024,6 +1024,95 @@ button.ghost:hover:not(:disabled) { background: var(--paper-2); border-color: va
 
 .squad-team li { margin: 0.15rem 0; }
 
+.pitch-box { margin-top: 1.6rem; }
+
+.pitch-title {
+  margin: 0 0 0.6rem;
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.field-pitch {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  margin-top: 0.4rem;
+  overflow: hidden;
+  border-radius: 14px;
+  background: repeating-linear-gradient(90deg, #23874a 0 10%, #1f7a3f 10% 20%);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.field-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.field-lines * {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.tok {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  transform: translate(-50%, -1rem);
+  cursor: grab;
+  touch-action: none;
+}
+
+.tok.moving { cursor: grabbing; z-index: 2; }
+
+.tok .dot {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--team);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.tok.gk .dot {
+  border-color: var(--team);
+  background: #facc15;
+  color: #111;
+}
+
+.tok.cap .dot { outline: 2px solid #facc15; outline-offset: 2px; }
+
+.tok .nm {
+  max-width: 6.5rem;
+  overflow: hidden;
+  padding: 0.05rem 0.35rem;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 559px) {
+  .tok { transform: translate(-50%, -0.75rem); }
+  .tok .dot { width: 1.5rem; height: 1.5rem; font-size: 0.6rem; }
+  .tok .nm { max-width: 4rem; font-size: 0.6rem; }
+}
+
 .actions label {
   display: inline-flex;
   align-items: center;
