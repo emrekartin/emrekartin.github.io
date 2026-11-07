@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Video — Emre Kartın</title>
+  <meta name="description" content="Videoyu küçült ve sıkıştır. Çözünürlüğü düşür, hedef boyut seç, MP4 olarak indir. Dosya yüklenmez, tarayıcında işlenir." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=21" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Video</h1>
+
+    <label class="drop" id="vid-drop" for="vid-file">
+      <input id="vid-file" type="file" accept="video/*,.mkv,.mov" />
+      <strong>Video seç veya buraya bırak</strong>
+      <span>MP4, MOV, WebM, MKV. Dosya yüklenmez, bu tarayıcıda işlenir.</span>
+    </label>
+
+    <p id="vid-info" class="status vid-info"></p>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="vid-res">Çözünürlük</label>
+        <select id="vid-res">
+          <option value="0">Aynı kalsın</option>
+          <option value="1080">1080p</option>
+          <option value="720" selected>720p</option>
+          <option value="480">480p</option>
+          <option value="360">360p</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="vid-quality">Kalite</label>
+        <select id="vid-quality">
+          <option value="low">Küçük dosya</option>
+          <option value="medium" selected>Dengeli</option>
+          <option value="high">Net</option>
+          <option value="target">Hedef boyut</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-3">
+      <div class="field" id="vid-target-field" hidden>
+        <label for="vid-target">Hedef boyut (MB)</label>
+        <input id="vid-target" type="number" min="1" max="4000" step="1" value="25" />
+      </div>
+      <div class="field">
+        <label for="vid-fps">Kare hızı</label>
+        <select id="vid-fps">
+          <option value="0" selected>Aynı kalsın</option>
+          <option value="30">30</option>
+          <option value="24">24</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="vid-audio">Ses</label>
+        <select id="vid-audio">
+          <option value="keep" selected>Kalsın</option>
+          <option value="drop">Sessiz</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" id="vid-run" disabled>Sıkıştır</button>
+      <button type="button" id="vid-cancel" class="ghost" hidden>Durdur</button>
+    </div>
+    <div id="vid-progress" class="progress" hidden><span></span></div>
+    <p id="vid-out" class="status" aria-live="polite"></p>
+    <p id="vid-error" class="error" role="alert"></p>
+
+    <div id="vid-result" class="vid-result" hidden>
+      <video id="vid-preview" controls playsinline></video>
+      <div class="actions">
+        <a id="vid-download" class="button-link" download>İndir</a>
+      </div>
+    </div>
+
+    <p class="status vid-credit">Sekme açık kalsın; arka plana alınınca tarayıcı işi yavaşlatabilir. Video işleme: <a href="https://github.com/Vanilagy/mediabunny" rel="noopener">Mediabunny</a> (MPL-2.0).</p>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script type="module" src="./app.js"></script>
+<script src="/site.js?v=6"></script>
+</body>
+</html>
