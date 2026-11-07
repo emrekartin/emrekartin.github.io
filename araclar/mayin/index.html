@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mayın Tarlası — Emre Kartın</title>
+  <meta name="description" content="Mayın Tarlası oyna. Kolay, orta ve zor seviye; ilk tıklama hep güvenli." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=29" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Mayın Tarlası</h1>
+
+    <div class="game-bar">
+      <div class="game-stat"><span>Mayın</span><strong id="m-left">0</strong></div>
+      <div class="game-stat"><span>Süre</span><strong id="m-time">0</strong></div>
+      <div class="game-stat"><span>En iyi</span><strong id="m-best">—</strong></div>
+      <span class="grow"></span>
+      <select id="m-level" aria-label="Seviye">
+        <option value="easy">Kolay</option>
+        <option value="mid">Orta</option>
+        <option value="hard">Zor</option>
+      </select>
+      <button type="button" id="m-flag" class="ghost" aria-pressed="false">Bayrak modu</button>
+      <button type="button" id="m-new">Yeni oyun</button>
+    </div>
+    <div class="mine-wrap"><div id="m-grid" class="mine-grid"></div></div>
+    <p id="m-msg" class="game-msg" aria-live="polite"></p>
+    <p class="game-help">Tıkla: aç · Sağ tık ya da Bayrak modu: bayrak koy · Açık bir sayıya tıkla: etrafındaki bayraklar tamamsa geri kalanı açılır. İlk tıklama hep güvenli.</p>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js?v=1"></script>
+<script src="/site.js?v=11"></script>
+</body>
+</html>

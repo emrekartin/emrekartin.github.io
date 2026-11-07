@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Penaltı — Emre Kartın</title>
+  <meta name="description" content="Penaltı atışları. Sırayla şut at ve kaleye geç; beşer atıştan sonra eşitlikte seri devam eder." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=29" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Penaltı</h1>
+
+    <div class="game-bar">
+      <div class="game-stat"><span>Sen</span><strong id="p-you">0</strong><div id="p-you-dots" class="pk-dots"></div></div>
+      <div class="game-stat"><span>Rakip</span><strong id="p-cpu">0</strong><div id="p-cpu-dots" class="pk-dots"></div></div>
+      <span class="grow"></span>
+      <div class="game-stat"><span>Galibiyet</span><strong id="p-record">0 / 0</strong></div>
+      <button type="button" id="p-new">Yeni seri</button>
+    </div>
+    <p id="p-turn" class="game-msg"></p>
+    <div class="pk-field">
+      <div class="pk-goal">
+        <div id="p-zones" class="pk-zones">
+          <button type="button" data-z="0" aria-label="Sol üst"></button>
+          <button type="button" data-z="1" aria-label="Orta üst"></button>
+          <button type="button" data-z="2" aria-label="Sağ üst"></button>
+          <button type="button" data-z="3" aria-label="Sol alt"></button>
+          <button type="button" data-z="4" aria-label="Orta alt"></button>
+          <button type="button" data-z="5" aria-label="Sağ alt"></button>
+        </div>
+      </div>
+      <div id="p-keeper" class="pk-keeper"></div>
+      <div id="p-ball" class="pk-ball"></div>
+    </div>
+    <p id="p-msg" class="game-msg" aria-live="polite"></p>
+    <p class="game-help">Önce sen vurursun, sonra kaleye geçersin. Kaleci doğru tarafa atlarsa kurtarır; üst köşeler daha zor kurtarılır ama auta gitme ihtimali var. Kaleci senin şut alışkanlıklarını öğrenir.</p>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js?v=1"></script>
+<script src="/site.js?v=11"></script>
+</body>
+</html>

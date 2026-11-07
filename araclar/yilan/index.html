@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yılan — Emre Kartın</title>
+  <meta name="description" content="Klasik yılan oyunu. Yemleri topla, kendine ve duvara çarpma. En yüksek skor saklanır." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=29" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Yılan</h1>
+
+    <div class="game-bar">
+      <div class="game-stat"><span>Skor</span><strong id="s-score">0</strong></div>
+      <div class="game-stat"><span>En iyi</span><strong id="s-best">0</strong></div>
+      <span class="grow"></span>
+      <select id="s-speed" aria-label="Hız">
+        <option value="160">Yavaş</option>
+        <option value="115" selected>Normal</option>
+        <option value="80">Hızlı</option>
+      </select>
+      <label class="check-inline"><input type="checkbox" id="s-wrap" /> Duvardan geç</label>
+    </div>
+    <div class="snake-box">
+      <canvas id="s-canvas" width="480" height="480" aria-label="Yılan oyunu"></canvas>
+      <div id="s-over" class="snake-over">Başlamak için dokun ya da bir yön tuşuna bas</div>
+    </div>
+    <div class="pad" aria-label="Yön tuşları">
+      <button type="button" class="ghost up" data-dir="up" aria-label="Yukarı">▲</button>
+      <button type="button" class="ghost left" data-dir="left" aria-label="Sola">◀</button>
+      <button type="button" class="ghost down" data-dir="down" aria-label="Aşağı">▼</button>
+      <button type="button" class="ghost right" data-dir="right" aria-label="Sağa">▶</button>
+    </div>
+    <p class="game-help">Ok tuşları ya da WASD · Boşluk: duraklat · Telefonda kaydır ya da alttaki tuşları kullan.</p>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js?v=3"></script>
+<script src="/site.js?v=11"></script>
+</body>
+</html>
