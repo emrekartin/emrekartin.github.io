@@ -1553,7 +1553,7 @@ html[data-theme="dark"] .warn { color: #e0b060; }
 
 @media (min-width: 800px) {
   .tool-grid { grid-template-columns: repeat(3, 1fr); }
-  .fact-grid { grid-template-columns: repeat(3, 1fr); }
+  .fact-grid { grid-template-columns: repeat(2, 1fr); }
   .qr-layout { grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr); }
   .preview { position: sticky; top: 1rem; }
 }
