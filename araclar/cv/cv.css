@@ -348,12 +348,15 @@
   .cv-page { background: white !important; }
   .cv-shell, .cv-body, .preview-pane { display: block !important; height: auto !important; overflow: visible !important; }
   .preview-pane { padding: 0; background: white; }
+  html, body { margin: 0 !important; padding: 0 !important; }
   .sheet {
     width: auto;
     min-height: 0;
     margin: 0;
-    padding: 0;
+    padding: 14mm;
     box-shadow: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
-  @page { size: A4; margin: 14mm; }
+  @page { size: A4; margin: 0; }
 }

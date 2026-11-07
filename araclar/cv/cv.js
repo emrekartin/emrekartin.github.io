@@ -67,16 +67,31 @@
     if (!raw) {
       try { raw = fromLegacy(JSON.parse(localStorage.getItem("resumeData") || "null")); } catch (err) { raw = null; }
     }
-    if (!raw || !raw.personal) return;
+    apply(raw);
+  }
+
+  function isLegacy(raw) {
+    return !!raw && (Array.isArray(raw.customSections) || "linkedin" in (raw.personal || {}) ||
+      (raw.experience || []).some(function (item) { return item && ("startDate" in item || "description" in item); }));
+  }
+
+  function apply(raw) {
+    if (raw && isLegacy(raw)) raw = fromLegacy(raw);
+    if (!raw || !raw.personal) return false;
     state = emptyState();
     Object.assign(state.personal, raw.personal || {});
     ["experience", "education", "projects", "certificates", "publications", "custom"].forEach(function (key) {
       if (Array.isArray(raw[key])) state[key] = raw[key].filter(realItem);
     });
-    state.skills = raw.skills || "";
-    state.languages = raw.languages || "";
-    state.references = raw.references || "";
+    Object.keys(state.personal).forEach(function (key) { state.personal[key] = String(state.personal[key] ?? ""); });
+    state.skills = String(raw.skills || "");
+    state.languages = String(raw.languages || "");
+    state.references = String(raw.references || "");
     if (STEPS.some(function (step) { return step.id === raw.step; })) state.step = raw.step;
+    ["experience", "education", "projects", "certificates", "publications", "custom"].forEach(function (key) {
+      state[key] = state[key].map(function (item) { return Object.assign(blank(key), item, { id: item.id || uid() }); });
+    });
+    return true;
   }
 
   function fromLegacy(raw) {
@@ -133,13 +148,13 @@
     };
   }
 
-  function save() {
+  function save(message) {
     localStorage.setItem(KEY, JSON.stringify(state));
-    saveState.textContent = "Kaydedildi";
+    saveState.textContent = message || "Kaydedildi";
     clearTimeout(saveTimer);
     saveTimer = setTimeout(function () {
       saveState.textContent = "Boş bölüm sayfada çıkmaz. Taslak bu tarayıcıda durur.";
-    }, 900);
+    }, message ? 4000 : 900);
   }
 
   function readPanel() {
@@ -247,7 +262,7 @@
         "</div>" +
         "<details" + (optional ? " open" : "") + "><summary>İsteğe bağlı bilgiler</summary>" +
           '<div class="row-2">' +
-            input("birth", "Doğum tarihi", p.birth, 'data-bind="birth" placeholder="1996"') +
+            input("birth", "Doğum tarihi", p.birth, 'data-bind="birth" placeholder="5.11.1995"') +
             input("license", "Ehliyet", p.license, 'data-bind="license" placeholder="B"') +
           "</div>" +
           '<div class="row-2">' +
@@ -389,7 +404,7 @@
     var contact = [p.email, p.phone, p.location, p.website].map(function (v) { return v.trim(); }).filter(Boolean);
     if (contact.length) parts.push('<p class="contact">' + contact.map(esc).join(" · ") + "</p>");
     var fine = [];
-    if (p.birth.trim()) fine.push("Doğum " + p.birth.trim());
+    if (p.birth.trim()) fine.push("Doğum: " + p.birth.trim());
     if (p.gender.trim()) fine.push(p.gender.trim());
     if (p.military.trim()) fine.push("Askerlik: " + p.military.trim());
     if (p.license.trim()) fine.push("Ehliyet: " + p.license.trim());
@@ -567,11 +582,49 @@
     render();
   });
 
+  function fileName() {
+    var name = state.personal.name.trim();
+    return name ? name + " CV" : "CV";
+  }
+
   document.getElementById("print").addEventListener("click", function () {
     readPanel();
     save();
     renderPreview();
-    window.print();
+    var title = document.title;
+    document.title = fileName();
+    try { window.print(); } finally { setTimeout(function () { document.title = title; }, 0); }
+  });
+
+  document.getElementById("export").addEventListener("click", function () {
+    readPanel();
+    save("Dosya indirildi. Sonra Aç ile geri yükleyebilirsin.");
+    var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+    var link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName() + ".json";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(function () { URL.revokeObjectURL(link.href); }, 1000);
+  });
+
+  var importInput = document.getElementById("import-file");
+  document.getElementById("import").addEventListener("click", function () { importInput.click(); });
+  importInput.addEventListener("change", function () {
+    var file = importInput.files[0];
+    importInput.value = "";
+    if (!file) return;
+    file.text().then(function (text) {
+      var raw;
+      try { raw = JSON.parse(text); } catch (err) { raw = null; }
+      if (!apply(raw)) {
+        saveState.textContent = "Bu dosya okunamadı. Kaydet ile indirilen .json dosyasını seç.";
+        return;
+      }
+      save(file.name + " yüklendi.");
+      render();
+    });
   });
 
   document.getElementById("reset").addEventListener("click", function () {

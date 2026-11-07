@@ -13,7 +13,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="stylesheet" href="/site.css?v=14" />
-  <link rel="stylesheet" href="./cv.css?v=3" />
+  <link rel="stylesheet" href="./cv.css?v=4" />
 </head>
 <body class="cv-page" data-view="edit">
   <div class="cv-shell">
@@ -26,6 +26,9 @@
       <div class="cv-top-actions">
         <button type="button" id="sample" class="ghost">Örnek</button>
         <button type="button" id="reset" class="ghost">Temizle</button>
+        <button type="button" id="import" class="ghost" title="Daha önce kaydettiğin .json dosyasını yükle">Aç</button>
+        <button type="button" id="export" class="ghost" title="Taslağı .json dosyası olarak indir">Kaydet</button>
+        <input type="file" id="import-file" accept=".json,application/json" hidden>
         <button type="button" id="print" title="Yazdır penceresinde hedef olarak PDF’i seç">PDF al</button>
       </div>
     </header>
@@ -44,7 +47,7 @@
       </aside>
     </div>
   </div>
-  <script src="./cv.js?v=4"></script>
+  <script src="./cv.js?v=5"></script>
 <script src="/site.js?v=7"></script>
 </body>
 </html>
