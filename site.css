@@ -1200,7 +1200,7 @@ input[type="color"]:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .xi-slot {
   display: grid;
-  grid-template-columns: 2.6rem 3.4rem 1fr;
+  grid-template-columns: 3rem 3.4rem 1fr;
   gap: 0.4rem;
   align-items: center;
 }

@@ -14,6 +14,10 @@
       "5 dış": set([[50, 80], [86, 52], [14, 52], [91, 13], [9, 13]]),
       "Yüksek-alçak": set([[50, 80], [86, 48], [14, 48], [50, 42], [37, 22]])
     },
+    positions: [
+      ["OK", "Oyun kurucu"], ["ŞG", "Şutör guard"], ["G", "Guard"], ["KF", "Kısa forvet"],
+      ["F", "Forvet"], ["UF", "Uzun forvet"], ["P", "Pivot"]
+    ],
     initial: "Standart",
     keeper: false,
     ratio: 0.94,

@@ -34,6 +34,11 @@ window.Lineup = function (cfg) {
   for (var i = 0; i < count; i++) slots.push({ no: "", name: "" });
 
   var posList = [];
+  var posNames = {};
+  (cfg.positions || []).forEach(function (p) {
+    posList.push(p[0]);
+    posNames[p[0]] = p[1];
+  });
   Object.keys(cfg.shapes).forEach(function (key) {
     cfg.shapes[key].forEach(function (s) {
       if (posList.indexOf(s.label) < 0) posList.push(s.label);
@@ -206,7 +211,16 @@ window.Lineup = function (cfg) {
         opt.textContent = label;
         tag.appendChild(opt);
       });
+      function longNames(on) {
+        Array.prototype.forEach.call(tag.options, function (opt) {
+          opt.textContent = on && posNames[opt.value] ? opt.value + " · " + posNames[opt.value] : opt.value;
+        });
+      }
+      tag.addEventListener("mousedown", function () { longNames(true); });
+      tag.addEventListener("keydown", function () { longNames(true); });
+      tag.addEventListener("blur", function () { longNames(false); });
       tag.addEventListener("change", function () {
+        longNames(false);
         labels[i] = tag.value;
         relabel();
         drawPitch();

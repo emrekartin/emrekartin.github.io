@@ -60,6 +60,12 @@
     title: "İlk 11",
     coachLabel: "Teknik direktör",
     shapes: shapes,
+    positions: [
+      ["KL", "Kaleci"], ["LİB", "Libero"], ["STP", "Stoper"], ["SLB", "Sol bek"], ["SĞB", "Sağ bek"],
+      ["SLKB", "Sol kanat bek"], ["SĞKB", "Sağ kanat bek"], ["DOS", "Defansif orta saha"], ["MO", "Merkez orta saha"],
+      ["SLO", "Sol orta saha"], ["SĞO", "Sağ orta saha"], ["OOS", "Ofansif orta saha"], ["SLK", "Sol kanat"],
+      ["SĞK", "Sağ kanat"], ["FRV", "Forvet"], ["SNT", "Santrfor"]
+    ],
     initial: "4-3-3",
     keeper: true,
     ratio: 1.4,
