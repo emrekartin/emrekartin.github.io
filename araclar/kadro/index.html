@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kadro — Emre Kartın</title>
+  <meta name="description" content="Halı saha kadrosu kur. Rastgele dağıt veya kaptanlar aldım verdim usulü seçsin. Liste tarayıcıda kalır." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=15" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Kadro</h1>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="squad-players">Oyuncular</label>
+        <textarea id="squad-players" placeholder="Her satıra bir oyuncu" spellcheck="false"></textarea>
+      </div>
+      <div class="field">
+        <label for="squad-keepers">Kaleciler</label>
+        <textarea id="squad-keepers" placeholder="İsteğe bağlı, her satıra bir" spellcheck="false"></textarea>
+      </div>
+    </div>
+    <div class="row-3">
+      <div class="field">
+        <label for="squad-teams">Takım</label>
+        <select id="squad-teams">
+          <option value="2" selected>2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="squad-mode">Mod</label>
+        <select id="squad-mode">
+          <option value="random" selected>Rastgele</option>
+          <option value="draft">Kaptanlar seçer</option>
+        </select>
+      </div>
+      <div class="field" id="squad-order-field" hidden>
+        <label for="squad-order">Sıra</label>
+        <select id="squad-order">
+          <option value="turn" selected>Aldım verdim</option>
+          <option value="snake">Yılan</option>
+        </select>
+      </div>
+    </div>
+    <p id="squad-hint" class="status">Kaleciler takımlara birer birer dağılır.</p>
+    <div class="actions">
+      <button type="button" id="squad-run">Dağıt</button>
+      <button type="button" id="squad-copy" class="ghost" disabled>Kopyala</button>
+    </div>
+    <p id="squad-error" class="error" role="alert"></p>
+
+    <section id="draft" class="draft" hidden>
+      <p id="draft-turn" class="status" aria-live="polite"></p>
+      <div id="draft-pool" class="draft-pool"></div>
+      <div class="actions">
+        <button type="button" id="draft-captains" class="ghost">Kaptanları rastgele seç</button>
+        <button type="button" id="draft-rest" class="ghost">Kalanı rastgele dağıt</button>
+        <button type="button" id="draft-undo" class="ghost">Geri al</button>
+      </div>
+    </section>
+
+    <div id="squad-out" class="squad-teams"></div>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+<script src="/site.js?v=3"></script>
+</body>
+</html>

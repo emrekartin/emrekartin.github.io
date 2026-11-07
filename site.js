@@ -5,6 +5,7 @@
     ["Zar", "/araclar/zar/", "Zar at, yazı tura", "zar dice yazi tura"],
     ["Rastgele Sayı", "/araclar/sayi/", "Aralıktan sayı çek", "random sayi kura"],
     ["Listeden Seç", "/araclar/sec/", "Satırlardan rastgele seç", "sec liste kura cekilis"],
+    ["Kadro", "/araclar/kadro/", "Halı saha takımı kur", "halisaha hali saha kadro takim kaptan mac futbol"],
     ["JSON", "/araclar/json/", "Hizala, sıkıştır, hatayı bul", "json format"],
     ["Base64", "/araclar/base64/", "Kodla veya çöz", "base64"],
     ["URL", "/araclar/url/", "Adresi kodla veya çöz", "url encode decode"],

@@ -974,6 +974,56 @@ button.ghost:hover:not(:disabled) { background: var(--paper-2); border-color: va
   color: var(--ink);
 }
 
+.draft { margin-top: 1.2rem; }
+
+.draft-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.8rem 0 0.4rem;
+}
+
+.draft-pool button { padding: 0.45rem 0.75rem; }
+
+.squad-teams {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.squad-team {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.squad-team h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.squad-team h2 span {
+  color: var(--muted);
+  font-family: var(--ui);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.squad-team ol {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.squad-team li { margin: 0.15rem 0; }
+
 .actions label {
   display: inline-flex;
   align-items: center;
