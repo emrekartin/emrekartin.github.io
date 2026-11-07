@@ -1350,6 +1350,48 @@ input[type="range"] {
 
 .il-note { margin-top: 1.2rem; font-size: 0.88rem; }
 
+.unit-list {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .unit-list { grid-template-columns: 1fr 1fr; }
+}
+
+.unit-list button.unit-row,
+.unit-list button.unit-row:hover {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  text-align: left;
+}
+
+.unit-list button.unit-row:hover { border-color: var(--ink); }
+
+.unit-num {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-family: Consolas, "Cascadia Mono", ui-monospace, monospace;
+  font-weight: 600;
+}
+
+.unit-name {
+  flex: none;
+  color: var(--muted);
+  font-family: var(--ui);
+  font-size: 0.85rem;
+}
+
 .actions label {
   display: inline-flex;
   align-items: center;

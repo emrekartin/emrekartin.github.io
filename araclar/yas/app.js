@@ -49,6 +49,18 @@
     return y + " yıl, " + m + " ay, " + d + " gün";
   }
 
+  function decimalAge(birth, on) {
+    var years = on.getFullYear() - birth.getFullYear();
+    var last = new Date(on.getFullYear(), birth.getMonth(), birth.getDate());
+    if (last > on) {
+      years -= 1;
+      last = new Date(on.getFullYear() - 1, birth.getMonth(), birth.getDate());
+    }
+    var next = new Date(last.getFullYear() + 1, birth.getMonth(), birth.getDate());
+    var value = years + daysBetween(last, on) / daysBetween(last, next);
+    return (Math.floor(value * 100) / 100).toFixed(2).replace(".", ",") + " yaş";
+  }
+
   function nextBirthday(birth, on) {
     if (birth.getMonth() === on.getMonth() && birth.getDate() === on.getDate()) return "Bugün yaş günü.";
     var year = on.getFullYear();
@@ -72,6 +84,6 @@
       errorEl.textContent = "Gün, doğumdan önce.";
       return;
     }
-    outEl.textContent = span(birth, on) + " · " + daysBetween(birth, on) + " gün · " + nextBirthday(birth, on);
+    outEl.textContent = span(birth, on) + " · " + decimalAge(birth, on) + " · " + daysBetween(birth, on) + " gün · " + nextBirthday(birth, on);
   });
 })();

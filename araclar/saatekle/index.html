@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saat Ekle — Emre Kartın</title>
+  <meta name="description" content="Bir saate saat ve dakika ekler ya da çıkarır." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=24" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Saat Ekle</h1>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="add-time">Başlangıç</label>
+        <input id="add-time" class="tr-time" type="text" inputmode="numeric" placeholder="14:30" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="add-op">İşlem</label>
+        <select id="add-op">
+          <option value="1">Ekle</option>
+          <option value="-1">Çıkar</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="add-h">Saat</label>
+        <input id="add-h" class="mono" type="text" inputmode="numeric" placeholder="2" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="add-m">Dakika</label>
+        <input id="add-m" class="mono" type="text" inputmode="numeric" placeholder="45" autocomplete="off" />
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" id="add-run">Hesapla</button>
+    </div>
+    <p id="add-out" class="status" aria-live="polite"></p>
+    <p id="add-error" class="error" role="alert"></p>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="/araclar/tr-sec.js?v=2"></script>
+  <script src="./app.js?v=1"></script>
+<script src="/site.js?v=9"></script>
+</body>
+</html>

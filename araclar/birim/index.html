@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="tr" translate="no">
+<script>try{var t=localStorage.getItem("ek-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Birim Çevir — Emre Kartın</title>
+  <meta name="description" content="Uzunluk, ağırlık, sıcaklık, alan, hacim, hız, veri, zaman, enerji, basınç ve güç birimlerini çevirir." />
+  <meta name="theme-color" content="#d5dce6" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/site.css?v=24" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <a class="brand" href="/">
+        <strong>Emre Kartın</strong>
+        <span>Yazılım geliştirici · Ankara</span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="/">Ana sayfa</a>
+        <a href="/araclar/" aria-current="page">Araçlar</a>
+        <a href="/yazi/">Yazılar</a>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Birim Çevir</h1>
+
+    <div class="field">
+      <label for="unit-cat">Tür</label>
+      <select id="unit-cat"></select>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="unit-val">Değer</label>
+        <input id="unit-val" class="mono" type="text" inputmode="decimal" value="1" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="unit-from">Birim</label>
+        <select id="unit-from"></select>
+      </div>
+    </div>
+    <p id="unit-out" class="status" aria-live="polite"></p>
+    <p id="unit-error" class="error" role="alert"></p>
+    <ul id="unit-list" class="unit-list"></ul>
+
+    <footer class="site-footer">
+      <a href="/araclar/">← Kullanılabilir araçlar</a>
+    </footer>
+  </div>
+  <script src="./app.js?v=1"></script>
+<script src="/site.js?v=9"></script>
+</body>
+</html>
