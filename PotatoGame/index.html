@@ -25,6 +25,10 @@
         <button id="start" type="button">Oyunu Başlat</button>
         <p>WASD yürü, Shift hızlı, Ctrl eğil, E etkileşim, F sev, G bırak, Esc menü. Masada sol tık soy, sağ sürükle döndür.</p>
       </div>
+      <div id="intro-clip" style="display:none" aria-hidden="true">
+        <video id="intro-video" playsinline></video>
+        <button id="skip-intro" type="button">Atla</button>
+      </div>
       <div id="loading" style="display:none">
         <p>Mutfak ısınıyor…</p>
         <div id="bar"><div id="fill"></div></div>
@@ -65,9 +69,15 @@
         }
       }
 
-      document.querySelector("#start").addEventListener("click", function () {
-        try { localStorage.setItem("patates_quality", quality.value); } catch (error) {}
-        gate.style.display = "none";
+      var clip = document.querySelector("#intro-clip");
+      var video = document.querySelector("#intro-video");
+      var started = false;
+
+      function startGame() {
+        if (started) return;
+        started = true;
+        clip.style.display = "none";
+        video.pause();
         loading.style.display = "flex";
 
         var buildUrl = "Build";
@@ -101,7 +111,29 @@
           });
         };
         document.body.appendChild(script);
-      });
+      }
+
+      function playIntroThenGame() {
+        try { localStorage.setItem("patates_quality", quality.value); } catch (error) {}
+        gate.style.display = "none";
+        clip.style.display = "flex";
+        clip.setAttribute("aria-hidden", "false");
+        video.src = "TemplateData/intro.mp4";
+        video.muted = false;
+        video.playsInline = true;
+        var playPromise = video.play();
+        if (playPromise && playPromise.catch) {
+          playPromise.catch(function () {
+            video.muted = true;
+            video.play().catch(function () { startGame(); });
+          });
+        }
+      }
+
+      video.addEventListener("ended", startGame);
+      video.addEventListener("error", startGame);
+      document.querySelector("#skip-intro").addEventListener("click", startGame);
+      document.querySelector("#start").addEventListener("click", playIntroThenGame);
     </script>
   </body>
 </html>
