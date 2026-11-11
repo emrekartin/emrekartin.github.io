@@ -16,6 +16,7 @@
     ["Refleks Testi", "/araclar/refleks/", "Tepki süreni ölç", "refleks tepki suresi reaksiyon hiz oyun"],
     ["Uçan Kuş", "/araclar/flappy/", "Flappy Bird tarzı", "ucan kus flappy bird oyun"],
     ["Koşu", "/araclar/kosu/", "Şerit değiştir, zıpla, kay", "kosu subway surfers hugo runner oyun"],
+    ["Patates", "/PotatoGame/", "Unity WebGL · 2 kişilik co-op", "patates potato unity webgl coop oyun"],
     ["Satranç", "/araclar/satranc/", "Bilgisayara ya da online", "satranc chess online oyun"],
     ["Dama", "/araclar/dama/", "Türk daması, online da olur", "dama turk damasi checkers online oyun"],
     ["JSON", "/araclar/json/", "Hizala, sıkıştır, hatayı bul", "json format"],
