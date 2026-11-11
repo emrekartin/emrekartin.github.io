@@ -124,6 +124,7 @@
         var playPromise = video.play();
         if (playPromise && playPromise.catch) {
           playPromise.catch(function () {
+            // Sesli otomatik oynatma engellenirse sessiz dene; olmazsa oyuna geç.
             video.muted = true;
             video.play().catch(function () { startGame(); });
           });
